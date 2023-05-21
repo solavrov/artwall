@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "artwall_backend": {
+      "main": "src/artwall_backend/main.mo",
+      "type": "motoko"
+    },
+    "artwall_frontend": {
+      "dependencies": [
+        "artwall_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/artwall_frontend/src/index.html"
+      },
+      "source": [
+        "src/artwall_frontend/assets",
+        "dist/artwall_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
