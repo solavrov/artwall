@@ -1,24 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>artwall</title>
-    <base href="/" />
-    <link rel="icon" href="favicon.ico" />
-    <link type="text/css" rel="stylesheet" href="main.css" />
-  </head>
-  <body>
-    <main>
-      <img src="logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#">
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting"></section>
-    </main>
-  </body>
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>MotoCampArtWall</title>
+        <style>
+
+            body {
+                visibility: hidden;
+            }
+            
+            td, tr {
+                text-align: center;
+            }
+            
+            #canvas {
+                border: 2px solid black;
+            }
+            
+            #container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+
+            #post {
+                display: flex;
+                justify-content: center;
+                padding: 0px; 
+                margin: 0px;
+            }
+
+            #message {
+                font-family: "Helvetica";
+                font-size: 20px;
+                color: green;
+                font-weight: bold;
+                padding: 0px; 
+                margin: 0px;
+            }
+
+            #github {
+                font-family: "Helvetica";
+                font-size: 14px;
+                color: blue;
+                font-weight: bold;
+            }
+            
+            #boot {
+                font-family: "Helvetica";
+                font-size: 36px;
+                color: blue;
+                font-weight: bold;
+                text-shadow: 2px 2px red;
+                padding: 0px; 
+                margin: 0px;
+            }
+
+            .palette {
+                font-family: "Helvetica";
+                font-size: 16px;
+                font-weight: bold;
+                color: black;
+            }
+
+            button {
+                background-color: green;
+                border: none;
+                color: white;
+                padding: 6px 10px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                font-weight : bold;
+                margin: 0px 0px;
+                transition-duration: 0.2s;
+                cursor: pointer;
+                background-color: white; 
+                color: green; 
+                border: 2px solid green;
+            }
+
+            button:hover {
+                background-color: green;
+                color: white;
+            }
+            
+            button:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+
+            #loader {
+                visibility: visible;
+                border: 20px solid green;
+                border-radius: 50%;
+                border-top: 20px solid red;
+                border-bottom: 20px solid blue;
+                width: 70px;
+                height: 70px;
+                animation: spin 1s linear infinite;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            @keyframes spin {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            
+        </style>
+    </head>
+    <body id="body">
+        <div id="loader"></div>
+        <table>
+            <tr>
+                <td style="vertical-align:top">
+                    <table>
+                        <tr>
+                            <td colspan="6">
+                                <p id="boot">Motoko ArtWall</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <a href="https://github.com/solavrov/artwall" id="github">github</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <img src="motoko.png" alt="Motoko" width="200" height="200">
+                            </td>
+                        </tr>
+                        <tr class="palette">
+                            <td>
+                                color:
+                            </td>
+                            <td style="background: black; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="black">
+                            </td>
+                            <td style="background: red; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="red">
+                            </td>
+                            <td style="background: green; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="green" checked="checked">
+                            </td>
+                            <td style="background: blue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="blue">
+                            </td>
+                            <td style="background: white; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="white">
+                            </td>
+                        </tr>
+                        <tr class="palette">
+                            <td>
+                                size:
+                            </td>
+                            <td style="border: 1px solid black">
+                                <input type="radio" name="sizePick" value="2">
+                                <label>2px</label>
+                            </td>
+                            <td style="border: 1px solid black">
+                                <input type="radio" name="sizePick" value="6">
+                                <label>6px</label>
+                            </td>
+                            <td style="border: 1px solid black">
+                                <input type="radio" name="sizePick" value="10" checked="checked">
+                                <label>10px</label>
+                            </td>
+                            <td style="border: 1px solid black">
+                                <input type="radio" name="sizePick" value="20">
+                                <label>20px</label>
+                            </td>
+                            <td style="border: 1px solid black">
+                                <input type="radio" name="sizePick" value="100">
+                                <label>100px</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <canvas id="canvas" width="400" height="400"></canvas>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div id="post">
+                                    <p id="message">Draw here <img src="arrow.png" width="30" height="30"> and &nbsp;</p>
+                                    <button id="postButton">Post</button>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="vertical-align:top">
+                    <div id="container"></div>
+                </td>
+            </tr>
+        </table>
+        <script src="index.js"></script>
+    </body>
 </html>
+
+
+
