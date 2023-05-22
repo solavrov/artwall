@@ -13,7 +13,7 @@ actor Gallery {
         return Nat32.fromNat(x % 4_294_967_296);
     };
 
-    var gallery = HashMap.HashMap<Nat, Text>(0, Nat.equal, _hash);
+    let gallery = HashMap.HashMap<Nat, Text>(0, Nat.equal, _hash);
 
     public func putToGallery(pix : Text) : async () {
         gallery.put(n, pix);
