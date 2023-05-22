@@ -31,7 +31,7 @@ async function build() {
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     ctx.fillStyle = 'green';
-    let brushSize = 10;
+    let brushSize = 6;
 
     const drawAt = (x, y) => {    
         ctx.fillRect(x - brushSize/2, y - brushSize/2, brushSize, brushSize);
@@ -94,14 +94,14 @@ async function build() {
         prevY = null;
     };
     
-    let colorPick = document.getElementsByName("colorPick");
+    const colorPick = document.getElementsByName("colorPick");
     for (let radio of colorPick) {     
         radio.onclick = function(event) {
             ctx.fillStyle = event.target.value;
         };
     }
     
-    let sizePick = document.getElementsByName("sizePick");
+    const sizePick = document.getElementsByName("sizePick");
     for (let radio of sizePick) {     
         radio.onclick = function(event) {
             brushSize = Number(event.target.value);
@@ -109,7 +109,6 @@ async function build() {
     }
             
     const postButton = document.getElementById("postButton");
-
     postButton.onclick = async function() {
         postButton.disabled = true;
         container.style.opacity = "0.2";
