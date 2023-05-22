@@ -112,23 +112,26 @@ async function build() {
 
     postButton.onclick = async function() {
         postButton.disabled = true;
+        container.style.opacity = "0.2";
+        postButton.disabled = true;
         loader.style.visibility = "visible";
         const img = document.createElement("img");
         img.style.height = "200px";
         img.style.width = "200px";
         const pix = canvas.toDataURL("image/png");
         if (pix !== VOID) {
-                await artwall_backend.putToGallery(pix);
-                img.src = pix;
-                let div = document.createElement("div");
-                div.appendChild(img);
-                container.prepend(div);
-                const c = ctx.fillStyle;
-                ctx.fillStyle = 'white';
-                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-                ctx.fillStyle = c;
+            await artwall_backend.putToGallery(pix);
+            img.src = pix;
+            let div = document.createElement("div");
+            div.appendChild(img);
+            container.prepend(div);
+            const c = ctx.fillStyle;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = c;
         }
         loader.style.visibility = "hidden";
+        container.style.opacity = "1";
         postButton.disabled = false;
     };
 
