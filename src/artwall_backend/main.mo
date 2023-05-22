@@ -29,8 +29,8 @@ actor Gallery {
     };
 
     system func postupgrade() {
-        for ((principal, student) in entries.vals()) {
-            gallery.put(principal, student);
+        for ((num, pix) in entries.vals()) {
+            gallery.put(num, pix);
         };
         entries := [];
     };
