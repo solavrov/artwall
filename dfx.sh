@@ -3,4 +3,3 @@
 
 dfx canister status --network ic 4u67j-raaaa-aaaal-qb4bq-cai #backend
 dfx canister status --network ic 4bzoe-qiaaa-aaaal-qb4ca-cai #frontend
-

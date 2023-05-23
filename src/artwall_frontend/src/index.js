@@ -19,7 +19,7 @@ async function build() {
         img.style.height = "200px";
         img.style.width = "200px";
         img.src = pix;
-        let div = document.createElement("div");
+        const div = document.createElement("div");
         div.appendChild(img);
         container.prepend(div);
     }
@@ -95,14 +95,14 @@ async function build() {
     };
     
     const colorPick = document.getElementsByName("colorPick");
-    for (let radio of colorPick) {     
+    for (const radio of colorPick) {     
         radio.onclick = function(event) {
             ctx.fillStyle = event.target.value;
         };
     }
     
     const sizePick = document.getElementsByName("sizePick");
-    for (let radio of sizePick) {     
+    for (const radio of sizePick) {     
         radio.onclick = function(event) {
             brushSize = Number(event.target.value);
         };
@@ -121,7 +121,7 @@ async function build() {
         if (pix !== VOID) {
             await artwall_backend.putToGallery(pix);
             img.src = pix;
-            let div = document.createElement("div");
+            const div = document.createElement("div");
             div.appendChild(img);
             container.prepend(div);
             const c = ctx.fillStyle;
