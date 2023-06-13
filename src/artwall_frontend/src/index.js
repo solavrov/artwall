@@ -34,7 +34,7 @@ async function build() {
     let brushSize = 6;
 
     const drawAt = (x, y) => {    
-        ctx.fillRect(x - brushSize/2, y - brushSize/2, brushSize, brushSize);
+        ctx.fillRect(x - brushSize/2 - 1, y - brushSize/2 - 1, brushSize, brushSize);
     };
 
     const getMouseCoords = (data) => {
