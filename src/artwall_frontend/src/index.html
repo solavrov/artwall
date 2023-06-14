@@ -24,6 +24,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: flex-start;
+                gap: 2px;
             }
 
             #post {
@@ -86,6 +87,29 @@
 
             #postButton:hover {
                 background-color: green;
+                color: white;
+            }
+
+            .doButton {
+                background-color: blue;
+                border: none;
+                color: white;
+                padding: 5px 5px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                font-weight : bold;
+                margin: 0px 0px;
+                transition-duration: 0.1s;
+                cursor: pointer;
+                background-color: white; 
+                color: blue; 
+                border: 2px solid blue;
+            }
+
+            .doButton:hover {
+                background-color: blue;
                 color: white;
             }
             
@@ -176,6 +200,39 @@
                             </td>
                         </tr>
                         <tr class="palette">
+                            <td></td>
+                            <td style="background: grey; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="grey">
+                            </td>
+                            <td style="background: pink; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="pink">
+                            </td>
+                            <td style="background: OliveDrab; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="OliveDrab" checked="checked">
+                            </td>
+                            <td style="background: LightSeaGreen; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="LightSeaGreen">
+                            </td>
+                            <td style="background: DarkOrange; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="DarkOrange">
+                            </td>
+                            <td style="background: Aquamarine; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Aquamarine">
+                            </td>
+                            <td style="background: SaddleBrown; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="SaddleBrown">
+                            </td>
+                            <td style="background: RebeccaPurple; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="RebeccaPurple">
+                            </td>
+                            <td style="background: Moccasin; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Moccasin">
+                            </td>
+                            <td style="background: Gainsboro; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Gainsboro">
+                            </td>
+                        </tr>
+                        <tr class="palette">
                             <td>
                                 brush:
                             </td>
@@ -200,18 +257,46 @@
                                 <label>100px</label>
                             </td>
                         </tr>
+                        <tr class="palette">
+                            <td></td>
+                            <td style="border: 1px solid black" colspan="2">
+                                <input type="radio" name="formPick" value="square" checked="checked">
+                                <label>&#9724;</label>
+                            </td>
+                            <td style="border: 1px solid black; font-size: 18px;" colspan="2">
+                                <input type="radio" name="formPick" value="circle">
+                                <label>&#9679;</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2">
+                                <input type="radio" name="dirPick" value="free" checked="checked">
+                                <label>&#8605;</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2">
+                                <input type="radio" name="dirPick" value="hor">
+                                <label>&#8644;</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2">
+                                <input type="radio" name="dirPick" value="ver">
+                                <label>&#8645;</label>
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="11">
                                 <canvas id="canvas" width="400" height="400"></canvas>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="11">
+                            <td>
+                                <button id="undoButton" class="doButton">&#8630;</button>
+                            </td>
+                            <td colspan="9">
                                 <div id="post">
                                     <p id="message">Draw here <img src="arrow.png" width="30" height="30"> and &nbsp;</p>
                                     <button id="postButton">Post</button>
                                 </div>
-                                
+                            </td>
+                            <td>
+                                <button id="reButton" class="doButton">&#8631;</button>
                             </td>
                         </tr>
                     </table>
