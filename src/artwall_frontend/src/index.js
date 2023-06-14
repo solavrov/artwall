@@ -212,6 +212,8 @@ async function build() {
     const postButton = document.getElementById("postButton");
     postButton.onclick = async function() {
         postButton.disabled = true;
+        undoButton.disabled = true;
+        redoButton.disabled = true;
         container.style.opacity = "0.2";
         postButton.disabled = true;
         loader.style.visibility = "visible";
@@ -235,6 +237,8 @@ async function build() {
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
         postButton.disabled = false;
+        undoButton.disabled = false;
+        redoButton.disabled = false;
     };
 
     const undoButton = document.getElementById("undoButton");
