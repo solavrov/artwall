@@ -24,6 +24,14 @@ actor Gallery {
         return Iter.toArray(gallery.vals());
     };
 
+    public query func getPicture(k : Nat) : async ?Text {
+        return gallery.get(k - 1);
+    };
+
+    public query func getSize() : async Nat {
+        return n;
+    };
+
     system func preupgrade() {
         entries := Iter.toArray(gallery.entries());
     };
