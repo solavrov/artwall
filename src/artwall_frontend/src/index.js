@@ -290,21 +290,29 @@ async function build() {
     }
 
     nextButton.onclick = async function() {
+        container.style.opacity = "0.2";
+        loader.style.visibility = "visible";
         let g = await getBlock(block + 1);
         if (g.length > 0) {
             block++;
             gallery = g;
             showGallery();
         }
+        loader.style.visibility = "hidden";
+        container.style.opacity = "1";
     }
 
     backButton.onclick = async function() {
+        container.style.opacity = "0.2";
+        loader.style.visibility = "visible";
         let g = await getBlock(block - 1);
         if (g.length > 0) {
             block--;
             gallery = g;
             showGallery();
         }
+        loader.style.visibility = "hidden";
+        container.style.opacity = "1";
     }
 
 }
