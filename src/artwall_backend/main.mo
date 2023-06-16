@@ -3,6 +3,8 @@ import Nat "mo:base/Nat";
 import Hash "mo:base/Hash";
 import Iter "mo:base/Iter";
 import Nat32 "mo:base/Nat32";
+import Buffer "mo:base/Buffer";
+import Array "mo:base/Array";
 
 actor Gallery {
 
@@ -30,6 +32,31 @@ actor Gallery {
 
     public query func getSize() : async Nat {
         return n;
+    };
+
+    public query func getBlock(blockNum : Nat, blockSize : Nat) : async [Text] {
+        if (blockNum == 0) {
+            return ["END"];
+        };
+        var isTail : Bool = false;
+        let start : Nat = (blockNum - 1) * blockSize;
+        var end : Nat = start + blockSize - 1;
+        if (start >= n) {
+            return ["END"];
+        } else if (end + 1 >= n) {
+            end := n - 1;
+            isTail := true;
+        };
+        let gal = Iter.toArray(gallery.vals());
+        let buff = Buffer.Buffer<Text>(0);
+        let iter = Iter.range(start, end);
+        for (i in iter) {
+            buff.add(gal[n + i - start - end  - 1]);
+        };
+        if (isTail) {
+            buff.add("END");
+        };
+        return Buffer.toArray<Text>(buff);
     };
 
     system func preupgrade() {

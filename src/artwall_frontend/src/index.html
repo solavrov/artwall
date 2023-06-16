@@ -85,19 +85,19 @@
                 border: 2px solid green;
             }
 
-            #postButton:hover {
+            #postButton:hover:not([disabled]) {
                 background-color: green;
                 color: white;
             }
 
-            #postButton:active {
+            #postButton:active:not([disabled]) {
                 background-color: white;
                 border: 2px solid blue;
                 color: white;
             }
 
             #postButton:disabled {
-                opacity: 0.6;
+                opacity: 0.4;
                 cursor: not-allowed;
             }
 
@@ -118,19 +118,19 @@
                 border: 2px solid blue;
             }
 
-            .doButton:hover {
+            .doButton:hover:not([disabled]) {
                 background-color: blue;
                 color: white;
             }
 
-            .doButton:active {
+            .doButton:active:not([disabled]) {
                 background-color: white;
                 border: 2px solid blue;
                 color: white;
             }
 
             .doButton:disabled {
-                opacity: 0.6;
+                opacity: 0.4;
                 cursor: not-allowed;
             }
 
@@ -157,6 +157,10 @@
                 100% {
                     transform: rotate(360deg);
                 }
+            }
+
+            hr {
+                border-top: 2px solid green;
             }
             
         </style>
@@ -321,6 +325,19 @@
                 </td>
                 <td style="vertical-align:top">
                     <div id="container"></div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button id="backButton" class="doButton">&#9664;&nbsp;Back</button>
+                    <button id="nextButton" class="doButton">Next&nbsp;&#9654;</button>
                 </td>
             </tr>
         </table>
