@@ -143,21 +143,31 @@ async function build() {
         }
     };
 
-    const getMouseCoords = (data) => {
-        const { x, y } = canvas.getBoundingClientRect();
-        const curX = data.clientX - x;
-        const curY = data.clientY - y;
-        return [curX, curY];
-    };
-
-    let buttonPressed = false;
     let prevX = null;
     let prevY = null;
 
-    onmousemove = (data) => {
-        if (!buttonPressed) { return; }
+    /////////// mouse drawing ////////////
+    let mousePressed = false;
 
-        let [curX, curY] = getMouseCoords(data);
+    const getMouseCoords = (event) => {
+        const { x, y } = canvas.getBoundingClientRect();
+        const curX = event.clientX - x;
+        const curY = event.clientY - y;
+        return [curX, curY];
+    };
+
+    canvas.onmousedown = (event) => {
+        if (event.button !== 0) { return; }
+        mousePressed = true;
+        const [x, y] = getMouseCoords(event);
+        [pressX, pressY] = [x, y];
+        drawAt(x, y);
+    };
+
+    onmousemove = (event) => {
+        if (!mousePressed) { return; }
+
+        let [curX, curY] = getMouseCoords(event);
 
         if (brushDir === "hor") {
             curY = pressY;
@@ -192,17 +202,9 @@ async function build() {
         prevY = curY;
     };
 
-    canvas.onmousedown = (data) => {
-        if (data.button !== 0) { return; }
-        buttonPressed = true;
-        const [x, y] = getMouseCoords(data);
-        [pressX, pressY] = [x, y];
-        drawAt(x, y);
-    };
-
-    onmouseup = (data) => {
-        if (data.button !== 0) { return; }
-        buttonPressed = false;
+    onmouseup = (event) => {
+        if (event.button !== 0) { return; }
+        mousePressed = false;
         prevX = null;
         prevY = null;
         const pix = canvas.toDataURL("image/png");
@@ -211,6 +213,79 @@ async function build() {
             buff.put(pix);
         }
     };
+
+    /////////// touch screen drawing //////////////
+
+    let touchPressed = false;
+
+    const getTouchCoords = (event) => {
+        const { x, y } = canvas.getBoundingClientRect();
+        const curX = event.touches[0].clientX - x;
+        const curY = event.touches[0].clientY - y;
+        return [curX, curY];
+    };
+
+    canvas.ontouchstart = (event) => {
+        event.preventDefault();
+        touchPressed = true;
+        const [x, y] = getTouchCoords(event);
+        [pressX, pressY] = [x, y];
+        drawAt(x, y);
+    };
+
+    canvas.ontouchmove = (event) => {
+        event.preventDefault();
+        if (!touchPressed) { return; }
+
+        let [curX, curY] = getTouchCoords(event);
+
+        if (brushDir === "hor") {
+            curY = pressY;
+        } else if (brushDir === "ver") {
+            curX = pressX;
+        }
+
+        if (prevX === null) {
+            drawAt(curX, curY);
+        } else {
+            const dx = curX - prevX;
+            const dy = curY - prevY;
+
+            if (dx === 0 && dy === 0) { 
+                drawAt(curX, curY);
+            } else if (Math.abs(dy) > Math.abs(dx)) {
+                for (let i = 0; i <= Math.abs(dy); i++) {
+                    const rx = prevX + dx * i / Math.abs(dy); 
+                    const ry = prevY + dy * i / Math.abs(dy); 
+                    drawAt(rx, ry);
+                }
+            } else if (Math.abs(dx) >= Math.abs(dy)) {
+                for (let i = 0; i <= Math.abs(dx); i++) {
+                    const rx = prevX + dx * i / Math.abs(dx); 
+                    const ry = prevY + dy * i / Math.abs(dx); 
+                    drawAt(rx, ry);
+                }
+            }
+        }
+
+        prevX = curX;
+        prevY = curY;
+    };
+
+    canvas.ontouchend = (event) => {
+        event.preventDefault();
+        if (!touchPressed) { return; }
+        touchPressed = false;
+        prevX = null;
+        prevY = null;
+        const pix = canvas.toDataURL("image/png");
+        if (buff.get() !== pix) {
+            buff.cut();
+            buff.put(pix);
+        }
+    };
+
+    ////////////////////////////////////////////
     
     const colorPick = document.getElementsByName("colorPick");
     for (const radio of colorPick) {     
@@ -239,8 +314,15 @@ async function build() {
             brushDir = event.target.value;
         };
     }
-            
+
+    //////////// buttons ///////////////
+
     const postButton = document.getElementById("postButton");
+    const undoButton = document.getElementById("undoButton");
+    const redoButton = document.getElementById("redoButton");
+
+    ///////////// buttons click //////////////
+            
     postButton.onclick = async function() {
         postButton.disabled = true;
         undoButton.disabled = true;
@@ -273,7 +355,7 @@ async function build() {
         redoButton.disabled = false;
     };
 
-    const undoButton = document.getElementById("undoButton");
+
     undoButton.onclick = function() {
         let res = buff.undo();
         if (res !== null) {
@@ -281,7 +363,7 @@ async function build() {
         }
     }
 
-    const redoButton = document.getElementById("redoButton");
+
     redoButton.onclick = function() {
         let res = buff.redo();
         if (res !== null) {
@@ -314,6 +396,168 @@ async function build() {
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
     }
+
+    /////////// buttons touch //////////////
+
+    let postButtonTouched = false;
+    let undoButtonTouched = false;
+    let redoButtonTouched = false;
+    let nextButtonTouched = false;
+    let backButtonTouched = false;
+
+    postButton.ontouchstart = function(event) {
+        event.preventDefault();
+        postButtonTouched = true;
+    }
+
+    postButton.ontouchmove = function(event) {
+        event.preventDefault();
+    }
+
+    postButton.ontouchcancel = function(event) {
+        event.preventDefault();
+    }
+
+    postButton.ontouchend = async function(event) {
+        event.preventDefault();
+        if (!postButtonTouched) { return; }
+        postButtonTouched = false;
+        postButton.disabled = true;
+        undoButton.disabled = true;
+        redoButton.disabled = true;
+        backButton.disabled = true;
+        nextButton.disabled = true;
+        container.style.opacity = "0.2";
+        postButton.disabled = true;
+        loader.style.visibility = "visible";
+        const img = document.createElement("img");
+        img.style.height = "200px";
+        img.style.width = "200px";
+        const pix = canvas.toDataURL("image/png");
+        if (pix !== VOID) {
+            await artwall_backend.putToGallery(pix);
+            block = 1;
+            gallery = await getBlock(block);
+            showGallery();
+            const c = ctx.fillStyle;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = c;
+            buff.clean();
+            buff.put(canvas.toDataURL("image/png"));
+        }
+        loader.style.visibility = "hidden";
+        container.style.opacity = "1";
+        postButton.disabled = false;
+        undoButton.disabled = false;
+        redoButton.disabled = false;
+    };
+
+    undoButton.ontouchstart = function(event) {
+        event.preventDefault();
+        undoButtonTouched = true;
+    }
+
+    undoButton.ontouchmove = function(event) {
+        event.preventDefault();
+    }
+
+    undoButton.ontouchcancel = function(event) {
+        event.preventDefault();
+    }
+
+    undoButton.ontouchend = function(event) {
+        event.preventDefault();
+        if (!undoButtonTouched) { return; }
+        undoButtonTouched = false;
+        let res = buff.undo();
+        if (res !== null) {
+            drawImg(res);
+        }
+    }
+
+    redoButton.ontouchstart = function(event) {
+        event.preventDefault();
+        redoButtonTouched = true;
+    }
+
+    redoButton.ontouchmove = function(event) {
+        event.preventDefault();
+    }
+
+    redoButton.ontouchcancel = function(event) {
+        event.preventDefault();
+    }
+
+    redoButton.ontouchend = function(event) {
+        event.preventDefault();
+        if (!redoButtonTouched) { return; }
+        redoButtonTouched = false;
+        let res = buff.redo();
+        if (res !== null) {
+            drawImg(res);
+        }
+    }
+
+    nextButton.ontouchstart = function(event) {
+        event.preventDefault();
+        nextButtonTouched = true;
+    }
+
+    nextButton.ontouchmove = function(event) {
+        event.preventDefault();
+    }
+
+    nextButton.ontouchcancel = function(event) {
+        event.preventDefault();
+    }
+
+    nextButton.ontouchend = async function(event) {
+        event.preventDefault();
+        if (!nextButtonTouched) { return; }
+        nextButtonTouched = false;
+        container.style.opacity = "0.2";
+        loader.style.visibility = "visible";
+        let g = await getBlock(block + 1);
+        if (g.length > 0) {
+            block++;
+            gallery = g;
+            showGallery();
+        }
+        loader.style.visibility = "hidden";
+        container.style.opacity = "1";
+    }
+
+    backButton.ontouchstart = function(event) {
+        event.preventDefault();
+        backButtonTouched = true;
+    }
+
+    backButton.ontouchmove = function(event) {
+        event.preventDefault();
+    }
+
+    backButton.ontouchcancel = function(event) {
+        event.preventDefault();
+    }
+
+    backButton.ontouchend = async function(event) {
+        event.preventDefault();
+        if (!backButtonTouched) { return; }
+        backButtonTouched = false;
+        container.style.opacity = "0.2";
+        loader.style.visibility = "visible";
+        let g = await getBlock(block - 1);
+        if (g.length > 0) {
+            block--;
+            gallery = g;
+            showGallery();
+        }
+        loader.style.visibility = "hidden";
+        container.style.opacity = "1";
+    }
+
+    //////////////////////////
 
 }
 
