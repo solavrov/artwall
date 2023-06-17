@@ -66,7 +66,8 @@ async function build() {
     ///// global variables /////
     const glob = {
         block: 1,
-        gallery: [],
+        gallery: [], //gallery block in container
+        gallery1: [], //first block of the gallery
         brushSize: 6,
         brushForm: "square",
         brushDir: "free", // direction: free, only horizontal, only vertical
@@ -112,9 +113,9 @@ async function build() {
     }
     
     ////// show gallery block in container ////////
-    function showGallery() {
+    function show(gallery) {
         container.innerHTML = "";
-        for (const pix of glob.gallery) {
+        for (const pix of gallery) {
             const img = document.createElement("img");
             img.style.height = "200px";
             img.style.width = "200px";
@@ -127,7 +128,8 @@ async function build() {
 
     /////// get block and and show ////////
     glob.gallery = await getBlock(glob.block);
-    showGallery();
+    glob.gallery1 = glob.gallery.slice(0);
+    show(glob.gallery);
 
     /////// turn off loader animation and show body ////////
     const body  = document.getElementById("body");
@@ -324,7 +326,7 @@ async function build() {
             await artwall_backend.putToGallery(pix);
             glob.block = 1;
             glob.gallery = await getBlock(glob.block);
-            showGallery();
+            show(glob.gallery);
             const c = ctx.fillStyle;
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -369,7 +371,7 @@ async function build() {
         if (g.length > 0) {
             glob.block++;
             glob.gallery = g;
-            showGallery();
+            show(glob.gallery);
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
@@ -382,7 +384,7 @@ async function build() {
         if (g.length > 0) {
             glob.block--;
             glob.gallery = g;
-            showGallery();
+            show(glob.gallery);
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
@@ -483,7 +485,7 @@ async function build() {
         if (g.length > 0) {
             glob.block++;
             glob.gallery = g;
-            showGallery();
+            show(glob.gallery);
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
@@ -513,7 +515,7 @@ async function build() {
         if (g.length > 0) {
             glob.block--;
             glob.gallery = g;
-            showGallery();
+            show(glob.gallery);
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
