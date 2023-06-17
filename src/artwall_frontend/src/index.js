@@ -150,7 +150,7 @@ async function build() {
 
     ///// draw text image on canvas /////
     const drawImg = (txt) => {
-        let img = new Image();
+        const img = new Image();
         img.src = txt;
         img.onload = function() {
             ctx.drawImage(img, 0, 0);
@@ -324,9 +324,9 @@ async function build() {
         const pix = canvas.toDataURL("image/png");
         if (pix !== VOID) {
             await artwall_backend.putToGallery(pix);
-            glob.block = 1;
-            glob.gallery = await getBlock(glob.block);
-            show(glob.gallery);
+            glob.gallery1.push(pix);
+            glob.gallery1.shift();
+            show(glob.gallery1);
             const c = ctx.fillStyle;
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -339,6 +339,7 @@ async function build() {
         postButton.disabled = false;
         undoButton.disabled = false;
         redoButton.disabled = false;
+        nextButton.disabled = false;
     }
 
     ///////////// buttons click handlers //////////////
@@ -384,6 +385,9 @@ async function build() {
         if (g.length > 0) {
             glob.block--;
             glob.gallery = g;
+            if (glob.block === 1) {
+                glob.gallery1 = g.slice(0);
+            }
             show(glob.gallery);
         }
         loader.style.visibility = "hidden";
@@ -515,6 +519,9 @@ async function build() {
         if (g.length > 0) {
             glob.block--;
             glob.gallery = g;
+            if (glob.block === 1) {
+                glob.gallery1 = g.slice(0);
+            }
             show(glob.gallery);
         }
         loader.style.visibility = "hidden";
