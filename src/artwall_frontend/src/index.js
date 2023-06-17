@@ -1,10 +1,13 @@
 import { artwall_backend } from "../../declarations/artwall_backend";
 
+////// global constants ///////
+// text representation of empty canvas (white rectangle) to check that nothing was drown
 const VOID = "data:image/png;base64,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";
-const ADJUSTMENT = -1;
-const EDITOR_BUFFER_SIZE = 100;
-const BLOCK_SIZE = 30;
+const ADJUSTMENT = -1; // brush position adjustment
+const EDITOR_BUFFER_SIZE = 100; // size of undo-redo editors buffer
+const BLOCK_SIZE = 30; // number of pictures from total gallery to show at a time
 
+////// class that is used for managing redo and undo during editing pictures //////
 class EditorBuffer {
 
     constructor(size) {
@@ -57,41 +60,61 @@ class EditorBuffer {
 
 }
 
-
+////// build app ///////
 async function build() {
 
-    let block = 1;
-    let gallery = [];
+    ///// global variables /////
+    const glob = {
+        block: 1,
+        gallery: [],
+        brushSize: 6,
+        brushForm: "square",
+        brushDir: "free", // direction: free, only horizontal, only vertical
+        pressX: null,
+        pressY: null,
+        prevX: null,
+        prevY: null,
+        mousePressed: false,
+        screenTouched: false,
+        postButtonTouched: false,
+        undoButtonTouched: false,
+        redoButtonTouched: false,
+        nextButtonTouched: false,
+        backButtonTouched: false
+    }
+
+    const container = document.getElementById("container");
     const backButton  = document.getElementById("backButton");
     const nextButton  = document.getElementById("nextButton");
-    const container = document.getElementById("container");
-    
-    async function getBlock(b) {
-        let g = await artwall_backend.getBlock(b, BLOCK_SIZE);
-        if (g[0] === "END") {
-            if (b == 1) {
+
+    ///// get part of total gallery (BLOCK_SIZE) to show in container) //////
+    async function getBlock(block) {
+        let gallery = await artwall_backend.getBlock(block, BLOCK_SIZE);
+        if (gallery[0] === "END") {
+            if (block == 1) {
                 nextButton.disabled = true;
                 backButton.disabled = true;    
             }
             return [];
         }
-        if (g[g.length - 1] === "END") {
+        if (gallery[gallery.length - 1] === "END") {
             nextButton.disabled = true;
-            g.splice(-1);
+            gallery.splice(-1);
         } else {
             nextButton.disabled = false;
         }
-        if (b > 1) {
+        if (block > 1) {
             backButton.disabled = false;
         } else {
             backButton.disabled = true;
         }
-        return g;
+        return gallery;
     }
     
+    ////// show gallery block in container ////////
     function showGallery() {
         container.innerHTML = "";
-        for (const pix of gallery) {
+        for (const pix of glob.gallery) {
             const img = document.createElement("img");
             img.style.height = "200px";
             img.style.width = "200px";
@@ -102,29 +125,28 @@ async function build() {
         }
     }
 
-    gallery = await getBlock(block);
+    /////// get block and and show ////////
+    glob.gallery = await getBlock(glob.block);
     showGallery();
 
+    /////// turn off loader animation and show body ////////
     const body  = document.getElementById("body");
     const loader = document.getElementById("loader");
     loader.style.visibility = "hidden";
     body.style.visibility = "visible";
 
+    /////// creating canvas ///////
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-    
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
     ctx.fillStyle = 'green';
-    let brushSize = 6;
-    let brushForm = "square";
-    let brushDir = "free";
-    let pressX = null;
-    let pressY = null;
+
+    ////// creading undo-redo buffer //////
     const buff = new EditorBuffer(EDITOR_BUFFER_SIZE);
     buff.put(canvas.toDataURL("image/png"));
 
+    ///// draw text image on canvas /////
     const drawImg = (txt) => {
         let img = new Image();
         img.src = txt;
@@ -133,21 +155,54 @@ async function build() {
         }
     }
 
+    ////// draw point on canvas ///////
     const drawAt = (x, y) => {    
-        if (brushForm === "square") {
-            ctx.fillRect(x - brushSize/2 + ADJUSTMENT, y - brushSize/2 + ADJUSTMENT, brushSize, brushSize);
+        if (glob.brushForm === "square") {
+            ctx.fillRect(x - glob.brushSize/2 + ADJUSTMENT, y - glob.brushSize/2 + ADJUSTMENT, glob.brushSize, glob.brushSize);
         } else {
             ctx.beginPath();
-            ctx.arc(x + ADJUSTMENT, y + ADJUSTMENT, brushSize/2, 0, 2 * Math.PI, false);
+            ctx.arc(x + ADJUSTMENT, y + ADJUSTMENT, glob.brushSize/2, 0, 2 * Math.PI, false);
             ctx.fill();
         }
     };
 
-    let prevX = null;
-    let prevY = null;
+    ////// draw between previous point and given point //////
+    const drawBetween = (x, y) => {
+
+        if (glob.brushDir === "hor") {
+            y = glob.pressY;
+        } else if (glob.brushDir === "ver") {
+            x = glob.pressX;
+        }
+
+        if (glob.prevX === null) {
+            drawAt(x, y);
+        } else {
+            const dx = x - glob.prevX;
+            const dy = y - glob.prevY;
+
+            if (dx === 0 && dy === 0) { 
+                drawAt(x, y);
+            } else if (Math.abs(dy) > Math.abs(dx)) {
+                for (let i = 0; i <= Math.abs(dy); i++) {
+                    const rx = glob.prevX + dx * i / Math.abs(dy); 
+                    const ry = glob.prevY + dy * i / Math.abs(dy); 
+                    drawAt(rx, ry);
+                }
+            } else if (Math.abs(dx) >= Math.abs(dy)) {
+                for (let i = 0; i <= Math.abs(dx); i++) {
+                    const rx = glob.prevX + dx * i / Math.abs(dx); 
+                    const ry = glob.prevY + dy * i / Math.abs(dx); 
+                    drawAt(rx, ry);
+                }
+            }
+        }
+
+        glob.prevX = x;
+        glob.prevY = y;
+    };
 
     /////////// mouse drawing ////////////
-    let mousePressed = false;
 
     const getMouseCoords = (event) => {
         const { x, y } = canvas.getBoundingClientRect();
@@ -158,55 +213,23 @@ async function build() {
 
     canvas.onmousedown = (event) => {
         if (event.button !== 0) { return; }
-        mousePressed = true;
+        glob.mousePressed = true;
         const [x, y] = getMouseCoords(event);
-        [pressX, pressY] = [x, y];
+        [glob.pressX, glob.pressY] = [x, y];
         drawAt(x, y);
     };
 
     onmousemove = (event) => {
-        if (!mousePressed) { return; }
-
+        if (!glob.mousePressed) { return; }
         let [curX, curY] = getMouseCoords(event);
-
-        if (brushDir === "hor") {
-            curY = pressY;
-        } else if (brushDir === "ver") {
-            curX = pressX;
-        }
-
-        if (prevX === null) {
-            drawAt(curX, curY);
-        } else {
-            const dx = curX - prevX;
-            const dy = curY - prevY;
-
-            if (dx === 0 && dy === 0) { 
-                drawAt(curX, curY);
-            } else if (Math.abs(dy) > Math.abs(dx)) {
-                for (let i = 0; i <= Math.abs(dy); i++) {
-                    const rx = prevX + dx * i / Math.abs(dy); 
-                    const ry = prevY + dy * i / Math.abs(dy); 
-                    drawAt(rx, ry);
-                }
-            } else if (Math.abs(dx) >= Math.abs(dy)) {
-                for (let i = 0; i <= Math.abs(dx); i++) {
-                    const rx = prevX + dx * i / Math.abs(dx); 
-                    const ry = prevY + dy * i / Math.abs(dx); 
-                    drawAt(rx, ry);
-                }
-            }
-        }
-
-        prevX = curX;
-        prevY = curY;
+        drawBetween(curX, curY);
     };
 
     onmouseup = (event) => {
         if (event.button !== 0) { return; }
-        mousePressed = false;
-        prevX = null;
-        prevY = null;
+        glob.mousePressed = false;
+        glob.prevX = null;
+        glob.prevY = null;
         const pix = canvas.toDataURL("image/png");
         if (buff.get() !== pix) {
             buff.cut();
@@ -216,68 +239,34 @@ async function build() {
 
     /////////// touch screen drawing //////////////
 
-    let touchPressed = false;
-
     const getTouchCoords = (event) => {
         const { x, y } = canvas.getBoundingClientRect();
-        const curX = event.touches[0].clientX - x;
-        const curY = event.touches[0].clientY - y;
-        return [curX, curY];
+        const touchX = event.touches[0].clientX - x;
+        const touchY = event.touches[0].clientY - y;
+        return [touchX, touchY];
     };
 
     canvas.ontouchstart = (event) => {
         event.preventDefault();
-        touchPressed = true;
+        glob.screenTouched = true;
         const [x, y] = getTouchCoords(event);
-        [pressX, pressY] = [x, y];
+        [glob.pressX, glob.pressY] = [x, y];
         drawAt(x, y);
     };
 
     canvas.ontouchmove = (event) => {
         event.preventDefault();
-        if (!touchPressed) { return; }
-
-        let [curX, curY] = getTouchCoords(event);
-
-        if (brushDir === "hor") {
-            curY = pressY;
-        } else if (brushDir === "ver") {
-            curX = pressX;
-        }
-
-        if (prevX === null) {
-            drawAt(curX, curY);
-        } else {
-            const dx = curX - prevX;
-            const dy = curY - prevY;
-
-            if (dx === 0 && dy === 0) { 
-                drawAt(curX, curY);
-            } else if (Math.abs(dy) > Math.abs(dx)) {
-                for (let i = 0; i <= Math.abs(dy); i++) {
-                    const rx = prevX + dx * i / Math.abs(dy); 
-                    const ry = prevY + dy * i / Math.abs(dy); 
-                    drawAt(rx, ry);
-                }
-            } else if (Math.abs(dx) >= Math.abs(dy)) {
-                for (let i = 0; i <= Math.abs(dx); i++) {
-                    const rx = prevX + dx * i / Math.abs(dx); 
-                    const ry = prevY + dy * i / Math.abs(dx); 
-                    drawAt(rx, ry);
-                }
-            }
-        }
-
-        prevX = curX;
-        prevY = curY;
+        if (!glob.screenTouched) { return; }
+        let [touchX, touchY] = getTouchCoords(event);
+        drawBetween(touchX, touchY);
     };
 
     canvas.ontouchend = (event) => {
         event.preventDefault();
-        if (!touchPressed) { return; }
-        touchPressed = false;
-        prevX = null;
-        prevY = null;
+        if (!glob.screenTouched) { return; }
+        glob.screenTouched = false;
+        glob.prevX = null;
+        glob.prevY = null;
         const pix = canvas.toDataURL("image/png");
         if (buff.get() !== pix) {
             buff.cut();
@@ -285,45 +274,40 @@ async function build() {
         }
     };
 
-    ////////////////////////////////////////////
-    
+    /////// color pick radio ////////
     const colorPick = document.getElementsByName("colorPick");
     for (const radio of colorPick) {     
         radio.onclick = function(event) {
             ctx.fillStyle = event.target.value;
         };
     }
-    
+
+    /////// brush size pick radio ////////
     const sizePick = document.getElementsByName("sizePick");
     for (const radio of sizePick) {     
         radio.onclick = function(event) {
-            brushSize = Number(event.target.value);
+            glob.brushSize = Number(event.target.value);
         };
     }
 
+    /////// brush form pick radio ////////
     const formPick = document.getElementsByName("formPick");
     for (const radio of formPick) {     
         radio.onclick = function(event) {
-            brushForm = event.target.value;
+            glob.brushForm = event.target.value;
         };
     }
 
+    /////// brush direction pick radio ////////
     const dirPick = document.getElementsByName("dirPick");
     for (const radio of dirPick) {     
         radio.onclick = function(event) {
-            brushDir = event.target.value;
+            glob.brushDir = event.target.value;
         };
     }
 
-    //////////// buttons ///////////////
-
-    const postButton = document.getElementById("postButton");
-    const undoButton = document.getElementById("undoButton");
-    const redoButton = document.getElementById("redoButton");
-
-    ///////////// buttons click //////////////
-            
-    postButton.onclick = async function() {
+    /////// post ////////
+    async function post() {
         postButton.disabled = true;
         undoButton.disabled = true;
         redoButton.disabled = true;
@@ -338,8 +322,8 @@ async function build() {
         const pix = canvas.toDataURL("image/png");
         if (pix !== VOID) {
             await artwall_backend.putToGallery(pix);
-            block = 1;
-            gallery = await getBlock(block);
+            glob.block = 1;
+            glob.gallery = await getBlock(glob.block);
             showGallery();
             const c = ctx.fillStyle;
             ctx.fillStyle = 'white';
@@ -353,9 +337,16 @@ async function build() {
         postButton.disabled = false;
         undoButton.disabled = false;
         redoButton.disabled = false;
+    }
+
+    ///////////// buttons click handlers //////////////
+
+    const postButton = document.getElementById("postButton");
+    postButton.onclick = async function() {
+        post();
     };
 
-
+    const undoButton = document.getElementById("undoButton");
     undoButton.onclick = function() {
         let res = buff.undo();
         if (res !== null) {
@@ -363,7 +354,7 @@ async function build() {
         }
     }
 
-
+    const redoButton = document.getElementById("redoButton");
     redoButton.onclick = function() {
         let res = buff.redo();
         if (res !== null) {
@@ -374,10 +365,10 @@ async function build() {
     nextButton.onclick = async function() {
         container.style.opacity = "0.2";
         loader.style.visibility = "visible";
-        let g = await getBlock(block + 1);
+        let g = await getBlock(glob.block + 1);
         if (g.length > 0) {
-            block++;
-            gallery = g;
+            glob.block++;
+            glob.gallery = g;
             showGallery();
         }
         loader.style.visibility = "hidden";
@@ -387,27 +378,21 @@ async function build() {
     backButton.onclick = async function() {
         container.style.opacity = "0.2";
         loader.style.visibility = "visible";
-        let g = await getBlock(block - 1);
+        let g = await getBlock(glob.block - 1);
         if (g.length > 0) {
-            block--;
-            gallery = g;
+            glob.block--;
+            glob.gallery = g;
             showGallery();
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
     }
 
-    /////////// buttons touch //////////////
-
-    let postButtonTouched = false;
-    let undoButtonTouched = false;
-    let redoButtonTouched = false;
-    let nextButtonTouched = false;
-    let backButtonTouched = false;
+    /////////// buttons touch handlers //////////////
 
     postButton.ontouchstart = function(event) {
         event.preventDefault();
-        postButtonTouched = true;
+        glob.postButtonTouched = true;
     }
 
     postButton.ontouchmove = function(event) {
@@ -420,42 +405,14 @@ async function build() {
 
     postButton.ontouchend = async function(event) {
         event.preventDefault();
-        if (!postButtonTouched) { return; }
-        postButtonTouched = false;
-        postButton.disabled = true;
-        undoButton.disabled = true;
-        redoButton.disabled = true;
-        backButton.disabled = true;
-        nextButton.disabled = true;
-        container.style.opacity = "0.2";
-        postButton.disabled = true;
-        loader.style.visibility = "visible";
-        const img = document.createElement("img");
-        img.style.height = "200px";
-        img.style.width = "200px";
-        const pix = canvas.toDataURL("image/png");
-        if (pix !== VOID) {
-            await artwall_backend.putToGallery(pix);
-            block = 1;
-            gallery = await getBlock(block);
-            showGallery();
-            const c = ctx.fillStyle;
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            ctx.fillStyle = c;
-            buff.clean();
-            buff.put(canvas.toDataURL("image/png"));
-        }
-        loader.style.visibility = "hidden";
-        container.style.opacity = "1";
-        postButton.disabled = false;
-        undoButton.disabled = false;
-        redoButton.disabled = false;
+        if (!glob.postButtonTouched) { return; }
+        glob.postButtonTouched = false;
+        post();
     };
 
     undoButton.ontouchstart = function(event) {
         event.preventDefault();
-        undoButtonTouched = true;
+        glob.undoButtonTouched = true;
     }
 
     undoButton.ontouchmove = function(event) {
@@ -468,8 +425,8 @@ async function build() {
 
     undoButton.ontouchend = function(event) {
         event.preventDefault();
-        if (!undoButtonTouched) { return; }
-        undoButtonTouched = false;
+        if (!glob.undoButtonTouched) { return; }
+        glob.undoButtonTouched = false;
         let res = buff.undo();
         if (res !== null) {
             drawImg(res);
@@ -478,7 +435,7 @@ async function build() {
 
     redoButton.ontouchstart = function(event) {
         event.preventDefault();
-        redoButtonTouched = true;
+        glob.redoButtonTouched = true;
     }
 
     redoButton.ontouchmove = function(event) {
@@ -491,8 +448,8 @@ async function build() {
 
     redoButton.ontouchend = function(event) {
         event.preventDefault();
-        if (!redoButtonTouched) { return; }
-        redoButtonTouched = false;
+        if (!glob.redoButtonTouched) { return; }
+        glob.redoButtonTouched = false;
         let res = buff.redo();
         if (res !== null) {
             drawImg(res);
@@ -501,7 +458,7 @@ async function build() {
 
     nextButton.ontouchstart = function(event) {
         event.preventDefault();
-        nextButtonTouched = true;
+        glob.nextButtonTouched = true;
     }
 
     nextButton.ontouchmove = function(event) {
@@ -514,14 +471,14 @@ async function build() {
 
     nextButton.ontouchend = async function(event) {
         event.preventDefault();
-        if (!nextButtonTouched) { return; }
-        nextButtonTouched = false;
+        if (!glob.nextButtonTouched) { return; }
+        glob.nextButtonTouched = false;
         container.style.opacity = "0.2";
         loader.style.visibility = "visible";
-        let g = await getBlock(block + 1);
+        let g = await getBlock(glob.block + 1);
         if (g.length > 0) {
-            block++;
-            gallery = g;
+            glob.block++;
+            glob.gallery = g;
             showGallery();
         }
         loader.style.visibility = "hidden";
@@ -530,7 +487,7 @@ async function build() {
 
     backButton.ontouchstart = function(event) {
         event.preventDefault();
-        backButtonTouched = true;
+        glob.backButtonTouched = true;
     }
 
     backButton.ontouchmove = function(event) {
@@ -543,24 +500,23 @@ async function build() {
 
     backButton.ontouchend = async function(event) {
         event.preventDefault();
-        if (!backButtonTouched) { return; }
-        backButtonTouched = false;
+        if (!glob.backButtonTouched) { return; }
+        glob.backButtonTouched = false;
         container.style.opacity = "0.2";
         loader.style.visibility = "visible";
-        let g = await getBlock(block - 1);
+        let g = await getBlock(glob.block - 1);
         if (g.length > 0) {
-            block--;
-            gallery = g;
+            glob.block--;
+            glob.gallery = g;
             showGallery();
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
     }
 
-    //////////////////////////
-
 }
 
+/////// run!!! //////
 onload = () => {
     build();
 };
