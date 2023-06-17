@@ -87,7 +87,7 @@ async function build() {
     const backButton  = document.getElementById("backButton");
     const nextButton  = document.getElementById("nextButton");
 
-    ///// get part of total gallery (BLOCK_SIZE) to show in container) //////
+    ///// get part of total gallery (BLOCK_SIZE) to show in container //////
     async function getBlock(block) {
         let gallery = await artwall_backend.getBlock(block, BLOCK_SIZE);
         if (gallery[0] === "END") {
@@ -142,7 +142,7 @@ async function build() {
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.fillStyle = 'green';
 
-    ////// creading undo-redo buffer //////
+    ////// creating undo-redo buffer //////
     const buff = new EditorBuffer(EDITOR_BUFFER_SIZE);
     buff.put(canvas.toDataURL("image/png"));
 

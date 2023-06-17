@@ -8,14 +8,14 @@ import Array "mo:base/Array";
 
 actor Gallery {
 
-    stable var n : Nat = 0; // number of pictures in gallery
-    stable var entries : [(Nat, Text)] = []; //array for preupgrade-postupgrade
+    stable var n : Nat = 0; // number of pictures in the gallery
+    stable var entries : [(Nat, Text)] = []; //the array for preupgrade-postupgrade
 
     private func _hash(x : Nat) : Nat32 {
         return Nat32.fromNat(x % 4_294_967_296);
     };
 
-    let gallery = HashMap.HashMap<Nat, Text>(0, Nat.equal, _hash); //gallery
+    let gallery = HashMap.HashMap<Nat, Text>(0, Nat.equal, _hash); //the gallery
 
     public func putToGallery(pix : Text) : async () {
         gallery.put(n, pix);
@@ -34,8 +34,8 @@ actor Gallery {
         return n;
     };
 
-    // return block (part of the gallery) under number blockNum (1, 2, 3...) from the gallery that has blockSize pictures
-    // if the block is the last (tail of the gallery) append "END" at the end of the array
+    // return block (part of the gallery) number blockNum (1, 2, 3...) from the gallery that has blockSize pictures
+    // if the block is the last (tail of the gallery), it appends "END" at the end of the array
     public query func getBlock(blockNum : Nat, blockSize : Nat) : async [Text] {
         if (blockNum == 0) {
             return ["END"];
