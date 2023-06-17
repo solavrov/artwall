@@ -392,6 +392,7 @@ async function build() {
 
     postButton.ontouchstart = function(event) {
         event.preventDefault();
+        if (postButton.disabled) { return; }
         glob.postButtonTouched = true;
     }
 
@@ -412,6 +413,7 @@ async function build() {
 
     undoButton.ontouchstart = function(event) {
         event.preventDefault();
+        if (undoButton.disabled) { return; }
         glob.undoButtonTouched = true;
     }
 
@@ -435,6 +437,7 @@ async function build() {
 
     redoButton.ontouchstart = function(event) {
         event.preventDefault();
+        if (redoButton.disabled) { return; }
         glob.redoButtonTouched = true;
     }
 
@@ -458,6 +461,7 @@ async function build() {
 
     nextButton.ontouchstart = function(event) {
         event.preventDefault();
+        if (nextButton.disabled) { return; }
         glob.nextButtonTouched = true;
     }
 
@@ -487,6 +491,7 @@ async function build() {
 
     backButton.ontouchstart = function(event) {
         event.preventDefault();
+        if (backButton.disabled) { return; }
         glob.backButtonTouched = true;
     }
 
