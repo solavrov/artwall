@@ -177,26 +177,22 @@ async function build() {
             x = glob.pressX;
         }
 
-        if (glob.prevX === null) {
-            drawAt(x, y);
-        } else {
-            const dx = x - glob.prevX;
-            const dy = y - glob.prevY;
+        const dx = x - glob.prevX;
+        const dy = y - glob.prevY;
 
-            if (dx === 0 && dy === 0) { 
-                drawAt(x, y);
-            } else if (Math.abs(dy) > Math.abs(dx)) {
-                for (let i = 0; i <= Math.abs(dy); i++) {
-                    const rx = glob.prevX + dx * i / Math.abs(dy); 
-                    const ry = glob.prevY + dy * i / Math.abs(dy); 
-                    drawAt(rx, ry);
-                }
-            } else if (Math.abs(dx) >= Math.abs(dy)) {
-                for (let i = 0; i <= Math.abs(dx); i++) {
-                    const rx = glob.prevX + dx * i / Math.abs(dx); 
-                    const ry = glob.prevY + dy * i / Math.abs(dx); 
-                    drawAt(rx, ry);
-                }
+        if (dx === 0 && dy === 0) {
+            drawAt(x, y);
+        } else if (Math.abs(dy) > Math.abs(dx)) {
+            for (let i = 0; i <= Math.abs(dy); i++) {
+                const rx = glob.prevX + dx * i / Math.abs(dy); 
+                const ry = glob.prevY + dy * i / Math.abs(dy); 
+                drawAt(rx, ry);
+            }
+        } else if (Math.abs(dx) >= Math.abs(dy)) {
+            for (let i = 0; i <= Math.abs(dx); i++) {
+                const rx = glob.prevX + dx * i / Math.abs(dx); 
+                const ry = glob.prevY + dy * i / Math.abs(dx); 
+                drawAt(rx, ry);
             }
         }
 
@@ -217,7 +213,7 @@ async function build() {
         if (event.button !== 0) { return; }
         glob.mousePressed = true;
         const [x, y] = getMouseCoords(event);
-        [glob.pressX, glob.pressY] = [x, y];
+        [glob.pressX, glob.pressY] = [glob.prevX, glob.prevY] = [x, y];
         drawAt(x, y);
     };
 
@@ -230,8 +226,6 @@ async function build() {
     onmouseup = (event) => {
         if (event.button !== 0) { return; }
         glob.mousePressed = false;
-        glob.prevX = null;
-        glob.prevY = null;
         const pix = canvas.toDataURL("image/png");
         if (buff.get() !== pix) {
             buff.cut();
@@ -252,7 +246,7 @@ async function build() {
         event.preventDefault();
         glob.screenTouched = true;
         const [x, y] = getTouchCoords(event);
-        [glob.pressX, glob.pressY] = [x, y];
+        [glob.pressX, glob.pressY] = [glob.prevX, glob.prevY] = [x, y];
         drawAt(x, y);
     };
 
@@ -267,8 +261,6 @@ async function build() {
         event.preventDefault();
         if (!glob.screenTouched) { return; }
         glob.screenTouched = false;
-        glob.prevX = null;
-        glob.prevY = null;
         const pix = canvas.toDataURL("image/png");
         if (buff.get() !== pix) {
             buff.cut();
