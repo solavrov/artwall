@@ -142,7 +142,7 @@ async function build() {
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = 'DodgerBlue';
+    ctx.fillStyle = 'red';
 
     ////// creating undo-redo buffers //////
     glob.imgBuff = new Buffer(EDITOR_BUFFER_SIZE);
