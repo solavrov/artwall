@@ -352,7 +352,7 @@ async function build() {
         nextButton.disabled = false;
     }
 
-    ///////////// buttons click handlers //////////////
+    ///////////// buttons mouse handlers //////////////
 
     const postButton = document.getElementById("postButton");
     postButton.onclick = async function() {
@@ -361,6 +361,7 @@ async function build() {
 
     const undoButton = document.getElementById("undoButton");
     undoButton.onclick = function() {
+        glob.prevX = glob.prevY = null;
         let res = buff.undo();
         if (res !== null) {
             drawImg(res);
@@ -445,6 +446,7 @@ async function build() {
         event.preventDefault();
         if (!glob.undoButtonTouched) { return; }
         glob.undoButtonTouched = false;
+        glob.prevX = glob.prevY = null;
         let res = buff.undo();
         if (res !== null) {
             drawImg(res);
