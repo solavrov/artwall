@@ -142,7 +142,7 @@ async function build() {
     const ctx = canvas.getContext("2d");
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'DodgerBlue';
 
     ////// creating undo-redo buffer //////
     const buff = new EditorBuffer(EDITOR_BUFFER_SIZE);
@@ -204,28 +204,37 @@ async function build() {
 
     const getMouseCoords = (event) => {
         const { x, y } = canvas.getBoundingClientRect();
-        const curX = event.clientX - x;
-        const curY = event.clientY - y;
-        return [curX, curY];
+        const mouseX = event.clientX - x;
+        const mouseY = event.clientY - y;
+        return [mouseX, mouseY];
     };
 
     canvas.onmousedown = (event) => {
         if (event.button !== 0) { return; }
         glob.mousePressed = true;
         const [x, y] = getMouseCoords(event);
-        [glob.pressX, glob.pressY] = [glob.prevX, glob.prevY] = [x, y];
-        drawAt(x, y);
+        [glob.pressX, glob.pressY] = [x, y];
+        if (glob.brushDir !== "line" || glob.prevX === null || glob.prevY === null) {
+            [glob.prevX, glob.prevY] = [x, y];
+            drawAt(x, y);
+        } else {
+            drawBetween(x, y);
+            [glob.prevX, glob.prevY] = [x, y];
+        }
     };
 
     onmousemove = (event) => {
-        if (!glob.mousePressed) { return; }
-        let [curX, curY] = getMouseCoords(event);
-        drawBetween(curX, curY);
+        if (!glob.mousePressed || glob.brushDir === "line") { return; }
+        let [x, y] = getMouseCoords(event);
+        drawBetween(x, y);
     };
 
     onmouseup = (event) => {
         if (event.button !== 0) { return; }
         glob.mousePressed = false;
+        if (glob.brushDir !== "line") {
+            glob.prevX = glob.prevY = null;
+        }
         const pix = canvas.toDataURL("image/png");
         if (buff.get() !== pix) {
             buff.cut();
@@ -246,21 +255,30 @@ async function build() {
         event.preventDefault();
         glob.screenTouched = true;
         const [x, y] = getTouchCoords(event);
-        [glob.pressX, glob.pressY] = [glob.prevX, glob.prevY] = [x, y];
-        drawAt(x, y);
+        [glob.pressX, glob.pressY] = [x, y];
+        if (glob.brushDir !== "line" || glob.prevX === null || glob.prevY === null) {
+            [glob.prevX, glob.prevY] = [x, y];
+            drawAt(x, y);
+        } else {
+            drawBetween(x, y);
+            [glob.prevX, glob.prevY] = [x, y];
+        }
     };
 
     canvas.ontouchmove = (event) => {
         event.preventDefault();
-        if (!glob.screenTouched) { return; }
-        let [touchX, touchY] = getTouchCoords(event);
-        drawBetween(touchX, touchY);
+        if (!glob.screenTouched || glob.brushDir === "line") { return; }
+        let [x, y] = getTouchCoords(event);
+        drawBetween(x, y);
     };
 
     canvas.ontouchend = (event) => {
         event.preventDefault();
         if (!glob.screenTouched) { return; }
         glob.screenTouched = false;
+        if (glob.brushDir !== "line") {
+            glob.prevX = glob.prevY = null;
+        }
         const pix = canvas.toDataURL("image/png");
         if (buff.get() !== pix) {
             buff.cut();
