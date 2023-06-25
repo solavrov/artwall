@@ -4,11 +4,11 @@ import { artwall_backend } from "../../declarations/artwall_backend";
 // text representation of empty canvas (white rectangle) to check that nothing was drown
 const VOID = "data:image/png;base64,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";
 const ADJUSTMENT = -1; // brush position adjustment
-const EDITOR_BUFFER_SIZE = 100; // size of undo-redo editors buffer
+const EDITOR_BUFFER_SIZE = 100; // size of undo-redo editors buffers
 const BLOCK_SIZE = 30; // number of pictures from total gallery to show at a time
 
 ////// class that is used for managing redo and undo during editing pictures //////
-class EditorBuffer {
+class Buffer {
 
     constructor(size) {
         this.size = size;
@@ -144,9 +144,11 @@ async function build() {
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.fillStyle = 'DodgerBlue';
 
-    ////// creating undo-redo buffer //////
-    const buff = new EditorBuffer(EDITOR_BUFFER_SIZE);
-    buff.put(canvas.toDataURL("image/png"));
+    ////// creating undo-redo buffers //////
+    glob.imgBuff = new Buffer(EDITOR_BUFFER_SIZE);
+    glob.imgBuff.put(canvas.toDataURL("image/png"));
+    glob.lineBuff = new Buffer(EDITOR_BUFFER_SIZE),
+    glob.lineBuff.put(null);
 
     ///// draw text image on canvas /////
     const drawImg = (txt) => {
@@ -214,12 +216,21 @@ async function build() {
         glob.mousePressed = true;
         const [x, y] = getMouseCoords(event);
         [glob.pressX, glob.pressY] = [x, y];
-        if (glob.brushDir !== "line" || glob.prevX === null || glob.prevY === null) {
+        if (glob.brushDir !== "line") {
+            glob.lineBuff.clean();
+            glob.lineBuff.put(null);
             [glob.prevX, glob.prevY] = [x, y];
             drawAt(x, y);
         } else {
-            drawBetween(x, y);
-            [glob.prevX, glob.prevY] = [x, y];
+            const c = glob.lineBuff.get();
+            if (c !== null) {
+                [glob.prevX, glob.prevY] = c;
+                drawBetween(x, y);
+            } else {
+                drawAt(x, y);
+            }
+            glob.lineBuff.cut();
+            glob.lineBuff.put([x, y]);
         }
     };
 
@@ -236,9 +247,9 @@ async function build() {
             glob.prevX = glob.prevY = null;
         }
         const pix = canvas.toDataURL("image/png");
-        if (buff.get() !== pix) {
-            buff.cut();
-            buff.put(pix);
+        if (glob.imgBuff.get() !== pix) {
+            glob.imgBuff.cut();
+            glob.imgBuff.put(pix);
         }
     };
 
@@ -256,12 +267,21 @@ async function build() {
         glob.screenTouched = true;
         const [x, y] = getTouchCoords(event);
         [glob.pressX, glob.pressY] = [x, y];
-        if (glob.brushDir !== "line" || glob.prevX === null || glob.prevY === null) {
+        if (glob.brushDir !== "line") {
+            glob.lineBuff.clean();
+            glob.lineBuff.put(null);
             [glob.prevX, glob.prevY] = [x, y];
             drawAt(x, y);
         } else {
-            drawBetween(x, y);
-            [glob.prevX, glob.prevY] = [x, y];
+            const c = glob.lineBuff.get();
+            if (c !== null) {
+                [glob.prevX, glob.prevY] = c;
+                drawBetween(x, y);
+            } else {
+                drawAt(x, y);
+            }
+            glob.lineBuff.cut();
+            glob.lineBuff.put([x, y]);
         }
     };
 
@@ -280,9 +300,9 @@ async function build() {
             glob.prevX = glob.prevY = null;
         }
         const pix = canvas.toDataURL("image/png");
-        if (buff.get() !== pix) {
-            buff.cut();
-            buff.put(pix);
+        if (glob.imgBuff.get() !== pix) {
+            glob.imgBuff.cut();
+            glob.imgBuff.put(pix);
         }
     };
 
@@ -341,8 +361,8 @@ async function build() {
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
             ctx.fillStyle = c;
-            buff.clean();
-            buff.put(canvas.toDataURL("image/png"));
+            glob.imgBuff.clean();
+            glob.imgBuff.put(canvas.toDataURL("image/png"));
         }
         loader.style.visibility = "hidden";
         container.style.opacity = "1";
@@ -361,8 +381,8 @@ async function build() {
 
     const undoButton = document.getElementById("undoButton");
     undoButton.onclick = function() {
-        glob.prevX = glob.prevY = null;
-        let res = buff.undo();
+        glob.lineBuff.undo();
+        let res = glob.imgBuff.undo();
         if (res !== null) {
             drawImg(res);
         }
@@ -370,7 +390,8 @@ async function build() {
 
     const redoButton = document.getElementById("redoButton");
     redoButton.onclick = function() {
-        let res = buff.redo();
+        glob.lineBuff.redo();
+        let res = glob.imgBuff.redo();
         if (res !== null) {
             drawImg(res);
         }
@@ -447,7 +468,8 @@ async function build() {
         if (!glob.undoButtonTouched) { return; }
         glob.undoButtonTouched = false;
         glob.prevX = glob.prevY = null;
-        let res = buff.undo();
+        glob.lineBuff.undo();
+        let res = glob.imgBuff.undo();
         if (res !== null) {
             drawImg(res);
         }
@@ -471,7 +493,8 @@ async function build() {
         event.preventDefault();
         if (!glob.redoButtonTouched) { return; }
         glob.redoButtonTouched = false;
-        let res = buff.redo();
+        glob.lineBuff.redo();
+        let res = glob.imgBuff.redo();
         if (res !== null) {
             drawImg(res);
         }
