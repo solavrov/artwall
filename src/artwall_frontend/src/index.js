@@ -334,6 +334,8 @@ async function build() {
     const dirPick = document.getElementsByName("dirPick");
     for (const radio of dirPick) {     
         radio.onclick = function(event) {
+            glob.lineBuff.clean();
+            glob.lineBuff.put(null);
             glob.brushDir = event.target.value;
         };
     }
