@@ -234,6 +234,11 @@ async function build() {
         }
     };
 
+    canvas.ondblclick = () => {
+        glob.lineBuff.clean();
+        glob.lineBuff.put(null);
+    }
+
     onmousemove = (event) => {
         if (!glob.mousePressed || glob.brushDir === "line") { return; }
         let [x, y] = getMouseCoords(event);
