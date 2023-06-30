@@ -164,6 +164,11 @@
             /* label {
                 font-size: 16px;
             } */
+
+            /* canvas {
+                image-rendering: pixelated;
+                image-rendering: crisp-edges;
+            } */
             
         </style>
     </head>
@@ -174,22 +179,22 @@
                 <td style="vertical-align:top">
                     <table>
                         <tr>
-                            <td colspan="13">
+                            <td colspan="14">
                                 <p id="boot">Motoko ArtWall</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="13">
+                            <td colspan="14">
                                 <a href="https://github.com/solavrov/artwall" id="github">github</a>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="13">
+                            <td colspan="14">
                                 <img src="motoko.png" alt="Motoko" width="200" height="200">
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td>
+                            <td colspan="2">
                                 color:
                             </td>
                             <td style="background: white; border: 1px solid black">
@@ -230,7 +235,6 @@
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td></td>
                             <td style="background: lawngreen; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="lawngreen">
                             </td>
@@ -249,6 +253,9 @@
                             <td style="background: LightSeaGreen; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="LightSeaGreen">
                             </td>
+                            <td style="background: SeaGreen; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="SeaGreen">
+                            </td>
                             <td style="background: skyblue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="skyblue">
                             </td>
@@ -261,6 +268,9 @@
                             <td style="background: MidnightBlue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="MidnightBlue">
                             </td>
+                            <td style="background: Violet; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Violet">
+                            </td>
                             <td style="background: magenta; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="magenta">
                             </td>
@@ -270,7 +280,7 @@
                         </tr>
 
                         <tr class="palette">
-                            <td>
+                            <td colspan="2">
                                 brush:
                             </td>
                             <td style="border: 1px solid black" colspan="2">
@@ -299,7 +309,6 @@
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td></td>
                             <td style="border: 1px solid black" colspan="2">
                                 <input type="radio" name="formPick" value="square" checked="checked">
                                 <label>&#9724;</label>
@@ -324,9 +333,13 @@
                                 <input type="radio" name="dirPick" value="line">
                                 <label>&#11092;</label>
                             </td>
+                            <td style="border: 1px solid black" colspan="2">
+                                <input type="radio" name="dirPick" value="fill">
+                                <label>&#10045;</label>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="13">
+                            <td colspan="14">
                                 <canvas id="canvas" width="400" height="400"></canvas>
                             </td>
                         </tr>
@@ -334,7 +347,7 @@
                             <td>
                                 <button id="undoButton" class="doButton">&#8630;</button>
                             </td>
-                            <td colspan="11">
+                            <td colspan="12">
                                 <div id="post">
                                     <p id="message">Draw here <img src="arrow.png" width="30" height="30"> and &nbsp;</p>
                                     <button id="postButton">Post</button>

@@ -3,7 +3,8 @@ import { artwall_backend } from "../../declarations/artwall_backend";
 ////// global constants ///////
 // text representation of empty canvas (white rectangle) to check that nothing was drown
 const VOID = "data:image/png;base64,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";
-const ADJUSTMENT = -1; // brush position adjustment
+const ADJUSTMENT = -1.5; // brush position adjustment for drawing
+const ADJUSTMENT2 = -2; // brush position adjustment for filling
 const EDITOR_BUFFER_SIZE = 100; // size of undo-redo editors buffers
 const BLOCK_SIZE = 30; // number of pictures from total gallery to show at a time
 
@@ -139,7 +140,7 @@ async function build() {
 
     /////// creating canvas ///////
     const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.fillStyle = 'red';
@@ -202,6 +203,65 @@ async function build() {
         glob.prevY = y;
     };
 
+    const fill = (imageData, j0) => {
+        const data = imageData.data;
+        const w = 4 * imageData.width;
+        const h = imageData.height;
+        const size = w * h;
+        const oldColor = [data[j0], data[j0 + 1], data[j0 + 2]];
+        const newColor = [
+            parseInt(ctx.fillStyle.slice(1, 3), 16),
+            parseInt(ctx.fillStyle.slice(3, 5), 16),
+            parseInt(ctx.fillStyle.slice(5, 7), 16)
+        ];
+        const isColorOld = (i) => {
+            if (i < 0 || i > size - 4) { return false; }
+            return data[i] === oldColor[0] && data[i + 1] === oldColor[1] && data[i + 2] === oldColor[2];
+        };
+        const fillLine = (i0) => {
+            let i1 = i0;
+            const minI = i0 - i0 % w;
+            while (i1 >= minI) {
+                if (isColorOld(i1)) {
+                    [data[i1], data[i1 + 1], data[i1 + 2]] = newColor;
+                    i1 -= 4;
+                } else {
+                    [data[i1], data[i1 + 1], data[i1 + 2]] = newColor;
+                    break;
+                }
+            }
+            let i2 = i0 + 4;
+            const maxI = minI + w - 4;
+            while (i2 <= maxI) {
+                if (isColorOld(i2)) {
+                    [data[i2], data[i2 + 1], data[i2 + 2]] = newColor;
+                    i2 += 4;
+                } else {
+                    [data[i2], data[i2 + 1], data[i2 + 2]] = newColor;
+                    break;
+                }
+            }
+            return (i1 + i2)/2 - ((i1 + i2)/2) % 4;
+        }
+        let j = j0;
+        while (j >= 0) {
+            j = fillLine(j) - w;
+            if (!isColorOld(j)) {
+                fillLine(j);
+                break;
+            }
+        }
+        j = j0 + w;
+        while (j <= size - 4) {
+            j = fillLine(j) + w;
+            if (!isColorOld(j)) {
+                fillLine(j);
+                break;
+            }
+        }
+
+    };
+
     /////////// mouse drawing ////////////
 
     const getMouseCoords = (event) => {
@@ -216,12 +276,7 @@ async function build() {
         glob.mousePressed = true;
         const [x, y] = getMouseCoords(event);
         [glob.pressX, glob.pressY] = [x, y];
-        if (glob.brushDir !== "line") {
-            glob.lineBuff.clean();
-            glob.lineBuff.put(null);
-            [glob.prevX, glob.prevY] = [x, y];
-            drawAt(x, y);
-        } else {
+        if (glob.brushDir === "line") {
             const c = glob.lineBuff.get();
             if (c !== null) {
                 [glob.prevX, glob.prevY] = c;
@@ -231,6 +286,15 @@ async function build() {
             }
             glob.lineBuff.cut();
             glob.lineBuff.put([x, y]);
+        } else if (glob.brushDir === "fill") {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            const j0 = 4 * (canvas.width * Math.round(y + ADJUSTMENT2) + Math.round(x + ADJUSTMENT2));
+            fill(imageData, j0);
+            ctx.putImageData(imageData, 0, 0);
+        } else {
+            [glob.prevX, glob.prevY] = [x, y];
+            drawAt(x, y);
         }
     };
 
@@ -240,7 +304,7 @@ async function build() {
     }
 
     onmousemove = (event) => {
-        if (!glob.mousePressed || glob.brushDir === "line") { return; }
+        if (!glob.mousePressed || glob.brushDir === "line" || glob.brushDir === "fill") { return; }
         let [x, y] = getMouseCoords(event);
         drawBetween(x, y);
     };
@@ -272,12 +336,7 @@ async function build() {
         glob.screenTouched = true;
         const [x, y] = getTouchCoords(event);
         [glob.pressX, glob.pressY] = [x, y];
-        if (glob.brushDir !== "line") {
-            glob.lineBuff.clean();
-            glob.lineBuff.put(null);
-            [glob.prevX, glob.prevY] = [x, y];
-            drawAt(x, y);
-        } else {
+        if (glob.brushDir === "line") {
             const c = glob.lineBuff.get();
             if (c !== null) {
                 [glob.prevX, glob.prevY] = c;
@@ -287,6 +346,15 @@ async function build() {
             }
             glob.lineBuff.cut();
             glob.lineBuff.put([x, y]);
+        } else if (glob.brushDir === "fill") {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            const j0 = 4 * (canvas.width * Math.round(y + ADJUSTMENT2) + Math.round(x + ADJUSTMENT2));
+            fill(imageData, j0);
+            ctx.putImageData(imageData, 0, 0);
+        } else {
+            [glob.prevX, glob.prevY] = [x, y];
+            drawAt(x, y);
         }
     };
 
