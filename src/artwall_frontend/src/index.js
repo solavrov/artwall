@@ -70,7 +70,7 @@ async function build() {
         gallery: [], //gallery block in container
         gallery1: [], //first block of the gallery
         brushSize: 6,
-        brushForm: "square",
+        brushForm: "circle",
         brushDir: "free", // direction: free, only horizontal, only vertical
         pressX: null,
         pressY: null,
