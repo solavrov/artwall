@@ -226,7 +226,6 @@ async function build() {
                     [data[i1], data[i1 + 1], data[i1 + 2]] = newColor;
                     i1 -= 4;
                 } else {
-                    [data[i1], data[i1 + 1], data[i1 + 2]] = newColor;
                     break;
                 }
             }
@@ -237,7 +236,6 @@ async function build() {
                     [data[i2], data[i2 + 1], data[i2 + 2]] = newColor;
                     i2 += 4;
                 } else {
-                    [data[i2], data[i2 + 1], data[i2 + 2]] = newColor;
                     break;
                 }
             }
@@ -247,7 +245,6 @@ async function build() {
         while (j >= 0) {
             j = fillLine(j) - w;
             if (!isColorOld(j)) {
-                fillLine(j);
                 break;
             }
         }
@@ -255,7 +252,6 @@ async function build() {
         while (j <= size - 4) {
             j = fillLine(j) + w;
             if (!isColorOld(j)) {
-                fillLine(j);
                 break;
             }
         }
