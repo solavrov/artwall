@@ -181,7 +181,29 @@
                 color: blue;
             }
 
+            #brushRange {
+                -webkit-appearance: none;
+                width: 250px;
+                background: lightgrey;
+                outline: none;
+                
+            }
 
+            #brushRange::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 15px;
+                height: 15px;
+                background: green;
+                cursor: pointer;
+            }
+
+            #brushRange::-moz-range-thumb {
+                width: 15px;
+                height: 15px;
+                background: green;
+                cursor: pointer;
+            }
 
         </style>
     </head>
@@ -263,9 +285,6 @@
                             <td style="background: LightSeaGreen; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="LightSeaGreen">
                             </td>
-                            <!-- <td style="background: SeaGreen; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="SeaGreen">
-                            </td> -->
                             <td style="background: skyblue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="skyblue">
                             </td>
@@ -278,9 +297,6 @@
                             <td style="background: MidnightBlue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="MidnightBlue">
                             </td>
-                            <!-- <td style="background: Violet; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="Violet">
-                            </td> -->
                             <td style="background: magenta; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="magenta">
                             </td>
@@ -318,6 +334,17 @@
                             <td style="border: 1px solid black" colspan="2" class="color1">
                                 <input type="radio" name="formPick" value="square">
                                 <label><img src="square.png" width="13" height="13"></label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="10" class="color2">
+                                <input id="brushRange" type="range" min="2" max="192" step="2" value="98">
+                                <input type="radio" name="sizePick" value="48" id="sizePickRange">
+                                <label id="brushRangeSize">48</label>
+                            </td>
+                        </tr>
+                        <tr class="palette">
+                            <td style="border: 1px solid black" colspan="2" class="color1">
+                                <input type="radio" name="formPick" value="star">
+                                <label><img src="star.png" width="14" height="14"></label>
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color3">
                                 <input type="radio" name="dirPick" value="free" checked="checked">

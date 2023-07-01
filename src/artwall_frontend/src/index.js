@@ -414,6 +414,16 @@ async function build() {
         };
     }
 
+    /////// brush size slider ////////
+    const brushRange = document.getElementById("brushRange");
+    const brushRangeSize = document.getElementById("brushRangeSize");
+    const sizePickRange = document.getElementById("sizePickRange");
+    brushRange.oninput = function() {
+        brushRangeSize.innerHTML = brushRange.value;
+        sizePickRange.value = brushRange.value;
+        glob.brushSize = Number(brushRange.value);
+    }
+
     /////// brush form pick radio ////////
     const formPick = document.getElementsByName("formPick");
     for (const radio of formPick) {     
