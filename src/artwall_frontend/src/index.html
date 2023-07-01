@@ -171,38 +171,46 @@
 
             .color1 {
                 color: red;
+                background-color: #FFCCCC;
             }
 
             .color2 {
                 color: green;
+                background-color: #CCFFCC;
             }
 
             .color3 {
                 color: blue;
+                background-color: #CCCCFF;
             }
 
             #brushRange {
                 -webkit-appearance: none;
                 width: 250px;
-                background: lightgrey;
+                background: white;
                 outline: none;
-                
+                border: 1px solid green;
+                height: 10px;
             }
 
             #brushRange::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 appearance: none;
-                width: 15px;
+                width: 10px;
                 height: 15px;
                 background: green;
                 cursor: pointer;
+                /* border-radius: 5px; */
+                border: 1px solid black;
             }
 
             #brushRange::-moz-range-thumb {
-                width: 15px;
+                width: 10px;
                 height: 15px;
                 background: green;
                 cursor: pointer;
+                /* border-radius: 5px; */
+                border: 1px solid black;
             }
 
         </style>
@@ -225,7 +233,7 @@
                         </tr>
                         <tr>
                             <td colspan="12">
-                                <img src="motoko.png" alt="Motoko" width="200" height="200">
+                                <img src="motoko.png" alt="Motoko" width="150" height="150">
                             </td>
                         </tr>
                         <tr class="palette">
@@ -326,8 +334,8 @@
                                 <label>24</label>
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color2">
-                                <input type="radio" name="sizePick" value="96">
-                                <label>96</label>
+                                <input type="radio" name="sizePick" value="48">
+                                <label>48</label>
                             </td>
                         </tr>
                         <tr class="palette">
@@ -335,10 +343,12 @@
                                 <input type="radio" name="formPick" value="square">
                                 <label><img src="square.png" width="13" height="13"></label>
                             </td>
-                            <td style="border: 1px solid black" colspan="10" class="color2">
-                                <input id="brushRange" type="range" min="2" max="192" step="2" value="98">
-                                <input type="radio" name="sizePick" value="48" id="sizePickRange">
-                                <label id="brushRangeSize">48</label>
+                            <td style="border: 1px solid black;" colspan="8" class="color2">
+                                <input id="brushRange" type="range" min="2" max="192" step="2" value="96">
+                            </td>
+                            <td style="border: 1px solid black;" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="96" id="sizePickRange">
+                                <label id="brushRangeSize">96</label>
                             </td>
                         </tr>
                         <tr class="palette">

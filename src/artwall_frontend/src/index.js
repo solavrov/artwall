@@ -421,7 +421,7 @@ async function build() {
     brushRange.oninput = function() {
         brushRangeSize.innerHTML = brushRange.value;
         sizePickRange.value = brushRange.value;
-        glob.brushSize = Number(brushRange.value);
+        if (sizePickRange.checked) { glob.brushSize = Number(brushRange.value); }
     }
 
     /////// brush form pick radio ////////
