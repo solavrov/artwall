@@ -164,9 +164,32 @@ async function build() {
     const drawAt = (x, y) => {    
         if (glob.brushForm === "square") {
             ctx.fillRect(x - glob.brushSize/2 + ADJUSTMENT, y - glob.brushSize/2 + ADJUSTMENT, glob.brushSize, glob.brushSize);
-        } else {
+        } else if (glob.brushForm === "circle") {
             ctx.beginPath();
             ctx.arc(x + ADJUSTMENT, y + ADJUSTMENT, glob.brushSize/2, 0, 2 * Math.PI, false);
+            ctx.fill();
+        } else if (glob.brushForm === "star") {
+            x += ADJUSTMENT;
+            y += ADJUSTMENT;
+            let s1, s2;
+            if (glob.brushSize >= 6) {
+                s1 = glob.brushSize / 2;
+                s2 = s1 / 5;
+            } else {
+                s1 = 2;
+                s2 = 0.5;
+            }
+            ctx.beginPath();
+            ctx.moveTo(x, y - s1);
+            ctx.lineTo(x - s2, y - s2);
+            ctx.lineTo(x - s1, y);
+            ctx.lineTo(x - s2, y + s2);
+            ctx.lineTo(x, y + s1);
+            ctx.lineTo(x + s2, y + s2);
+            ctx.lineTo(x + s1, y);
+            ctx.lineTo(x + s2, y - s2);
+            ctx.lineTo(x, y - s1);
+            ctx.closePath();
             ctx.fill();
         }
     };
