@@ -169,6 +169,20 @@
                 font-size: 16px;
             }
 
+            .color1 {
+                color: red;
+            }
+
+            .color2 {
+                color: green;
+            }
+
+            .color3 {
+                color: blue;
+            }
+
+
+
         </style>
     </head>
     <body id="body">
@@ -178,24 +192,21 @@
                 <td style="vertical-align:top">
                     <table>
                         <tr>
-                            <td colspan="14">
+                            <td colspan="12">
                                 <p id="boot">Motoko ArtWall</p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="14">
+                            <td colspan="12">
                                 <a href="https://github.com/solavrov/artwall" id="github">github</a>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="14">
+                            <td colspan="12">
                                 <img src="motoko.png" alt="Motoko" width="200" height="200">
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td colspan="2" class="text">
-                                color:
-                            </td>
                             <td style="background: white; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="white">
                             </td>
@@ -252,9 +263,9 @@
                             <td style="background: LightSeaGreen; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="LightSeaGreen">
                             </td>
-                            <td style="background: SeaGreen; border: 1px solid black">
+                            <!-- <td style="background: SeaGreen; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="SeaGreen">
-                            </td>
+                            </td> -->
                             <td style="background: skyblue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="skyblue">
                             </td>
@@ -267,9 +278,9 @@
                             <td style="background: MidnightBlue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="MidnightBlue">
                             </td>
-                            <td style="background: Violet; border: 1px solid black">
+                            <!-- <td style="background: Violet; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="Violet">
-                            </td>
+                            </td> -->
                             <td style="background: magenta; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="magenta">
                             </td>
@@ -278,66 +289,59 @@
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td colspan="2" class="text">
-                                brush:
-                            </td>
-                            <td style="border: 1px solid black" colspan="2">
-                                <input type="radio" name="sizePick" value="2">
-                                <label>2</label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2">
-                                <input type="radio" name="sizePick" value="6" checked="checked">
-                                <label>6</label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2">
-                                <input type="radio" name="sizePick" value="12">
-                                <label>12</label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2">
-                                <input type="radio" name="sizePick" value="24">
-                                <label>24</label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2">
-                                <input type="radio" name="sizePick" value="50">
-                                <label>50</label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2">
-                                <input type="radio" name="sizePick" value="100">
-                                <label>100</label>
-                            </td>
-                        </tr>
-                        <tr class="palette">
-                            <td style="border: 1px solid black; font-size: 18px;" colspan="2">
+                            <td style="border: 1px solid black; font-size: 18px;" colspan="2" class="color1">
                                 <input type="radio" name="formPick" value="circle" checked="checked">
                                 <label><img src="new-moon.png" width="13" height="13"></label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2">
+                            <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="2">
+                                <label>2</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="6" checked="checked">
+                                <label>6</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="12">
+                                <label>12</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="24">
+                                <label>24</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="96">
+                                <label>96</label>
+                            </td>
+                        </tr>
+                        <tr class="palette">
+                            <td style="border: 1px solid black" colspan="2" class="color1">
                                 <input type="radio" name="formPick" value="square">
                                 <label><img src="square.png" width="13" height="13"></label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2">
+                            <td style="border: 1px solid black" colspan="2" class="color3">
                                 <input type="radio" name="dirPick" value="free" checked="checked">
                                 <label><img src="zigzag.png" width="18" height="18"></label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2">
+                            <td style="border: 1px solid black" colspan="2" class="color3">
                                 <input type="radio" name="dirPick" value="hor">
                                 <label>&#8644;</label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2">
+                            <td style="border: 1px solid black" colspan="2" class="color3">
                                 <input type="radio" name="dirPick" value="ver">
                                 <label>&#8645;</label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2">
+                            <td style="border: 1px solid black" colspan="2" class="color3">
                                 <input type="radio" name="dirPick" value="line">
                                 <label><img src="line-segment.png" width="18" height="18"></label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2">
+                            <td style="border: 1px solid black" colspan="2" class="color3">
                                 <input type="radio" name="dirPick" value="fill">
                                 <label><img src="blood-drop.png" width="14" height="14"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="14">
+                            <td colspan="12">
                                 <canvas id="canvas" width="400" height="400"></canvas>
                             </td>
                         </tr>
@@ -345,7 +349,7 @@
                             <td>
                                 <button id="undoButton" class="doButton">&#8630;</button>
                             </td>
-                            <td colspan="12">
+                            <td colspan="10">
                                 <div id="post">
                                     <p id="message">Draw here <img src="arrow.png" width="30" height="30"> and &nbsp;</p>
                                     <button id="postButton">Post</button>
