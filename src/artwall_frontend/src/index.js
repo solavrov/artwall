@@ -438,7 +438,8 @@ async function build() {
     const colorPicker = document.getElementById("colorPicker");
     const myColorPick = document.getElementById("myColorPick");
     colorPicker.onchange = function(event) {
-        if (myColorPick.checked) { ctx.fillStyle = colorPicker.value; }
+        myColorPick.checked = true;
+        ctx.fillStyle = colorPicker.value;
     }
     myColorPick.onclick = function() {
         ctx.fillStyle = colorPicker.value;
@@ -460,7 +461,8 @@ async function build() {
     brushRange.oninput = function() {
         brushRangeSize.innerHTML = brushRange.value;
         sizePickRange.value = brushRange.value;
-        if (sizePickRange.checked) { glob.brushSize = Number(brushRange.value); }
+        sizePickRange.checked = true;
+        glob.brushSize = Number(brushRange.value);
     }
 
     brushRange.ontouchmove = function() {
