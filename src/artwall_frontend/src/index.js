@@ -424,6 +424,12 @@ async function build() {
         if (sizePickRange.checked) { glob.brushSize = Number(brushRange.value); }
     }
 
+    brushRange.ontouchmove = function() {
+        brushRangeSize.innerHTML = brushRange.value;
+        sizePickRange.value = brushRange.value;
+        if (sizePickRange.checked) { glob.brushSize = Number(brushRange.value); }
+    }
+
     /////// brush form pick radio ////////
     const formPick = document.getElementsByName("formPick");
     for (const radio of formPick) {     
