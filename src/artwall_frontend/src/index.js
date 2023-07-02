@@ -255,6 +255,8 @@ async function build() {
         glob.prevY = y;
     };
 
+
+    //////// fill area with current color /////////
     const fill = (imageData, j0) => {
         const data = imageData.data;
         const w = 4 * imageData.width;
@@ -440,6 +442,9 @@ async function build() {
     colorPicker.onchange = function(event) {
         myColorPick.checked = true;
         ctx.fillStyle = colorPicker.value;
+    }
+    colorPicker.onclick = function() {
+        myColorPick.checked = true;
     }
     myColorPick.onclick = function() {
         ctx.fillStyle = colorPicker.value;
