@@ -274,11 +274,11 @@
                         </tr>
                         <tr>
                             <td colspan="12">
-                                <img src="motoko.png" alt="Motoko" width="150" height="150">
+                                <img src="motoko.png" alt="Motoko" width="130" height="130">
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td colspan="2">
+                            <td colspan="2" style="color: green;">
                                 Color:
                             </td>
                             <td style="background: white; border: 1px solid black">
@@ -290,11 +290,20 @@
                             <td style="background: LightSlateGrey; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="LightSlateGrey">
                             </td>
+                            <td style="background: DarkSlateGray; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="DarkSlateGray">
+                            </td>
                             <td style="background: black; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="black">
                             </td>
                             <td style="background: LightPink; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="LightPink">
+                            </td>
+                            <td style="background: LightCoral; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="LightCoral" checked="checked">
+                            </td>
+                            <td style="background: tomato; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="tomato" checked="checked">
                             </td>
                             <td style="background: red; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="red" checked="checked">
@@ -302,6 +311,9 @@
                             <td style="background: FireBrick; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="FireBrick">
                             </td>
+
+                        </tr>
+                        <tr class="palette">
                             <td style="background: Moccasin; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="Moccasin">
                             </td>
@@ -311,8 +323,6 @@
                             <td style="background: orange; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="orange">
                             </td>
-                        </tr>
-                        <tr class="palette">
                             <td style="background: DarkOrange; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="DarkOrange">
                             </td>
@@ -337,11 +347,19 @@
                             <td style="background: LightSeaGreen; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="LightSeaGreen">
                             </td>
+                            <td style="background: MediumSeaGreen; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="MediumSeaGreen">
+                            </td>
+                        </tr>
+                        <tr class="palette">
                             <td style="background: skyblue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="skyblue">
                             </td>
                             <td style="background: DodgerBlue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="DodgerBlue">
+                            </td>
+                            <td style="background: SteelBlue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="SteelBlue">
                             </td>
                             <td style="background: blue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="blue">
@@ -349,45 +367,29 @@
                             <td style="background: MidnightBlue; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="MidnightBlue">
                             </td>
-                        </tr>
-                        <tr class="palette">
+                            <td style="background: SlateBlue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="SlateBlue">
+                            </td>
+                            <td style="background: Violet; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Violet">
+                            </td>
                             <td style="background: magenta; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="magenta">
                             </td>
                             <td style="background: mediumvioletred; border: 1px solid black">
                                 <input type="radio" name="colorPick" value="mediumvioletred">
                             </td>
-                            <td style="background: green; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="green">
+                            <td style="background: Purple; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Purple">
                             </td>
-                            <td style="background: OliveDrab; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="OliveDrab">
-                            </td>
-                            <td style="background: Aquamarine; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="Aquamarine">
-                            </td>
-                            <td style="background: LightSeaGreen; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="LightSeaGreen">
-                            </td>
-                            <td style="background: skyblue; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="skyblue">
-                            </td>
-                            <td style="background: DodgerBlue; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="DodgerBlue">
-                            </td>
-                            <td style="background: blue; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="blue">
-                            </td>
-                            <td style="background: MidnightBlue; border: 1px solid black">
-                                <input type="radio" name="colorPick" value="MidnightBlue">
-                            </td>
+
                             <td colspan="2" style="border: 1px solid black;">
                                 <input type="radio" id="myColorPick" name="colorPick" value="#FF0000">
                                 <input type="color" id="colorPicker" value="#FF0000">
                             </td>
                         </tr>
                         <tr class="palette">
-                            <td colspan="2">
+                            <td colspan="2" style="color: green;">
                                 Brush:
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color3">
@@ -421,20 +423,20 @@
                                 <label><img src="square.png" width="13" height="13"></label>
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color1">
-                                <input type="radio" name="formPick" value="star">
-                                <label><img src="star.png" width="14" height="14"></label>
+                                <input type="radio" name="formPick" value="ellipse">
+                                <label><img src="ellipse.png" width="14" height="14"></label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color1">
+                                <input type="radio" name="formPick" value="ellipse2">
+                                <label><img src="ellipse2.png" width="14" height="14"></label>
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color1">
                                 <input type="radio" name="formPick" value="star">
                                 <label><img src="star.png" width="14" height="14"></label>
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color1">
-                                <input type="radio" name="formPick" value="star">
-                                <label><img src="star.png" width="14" height="14"></label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2" class="color1">
-                                <input type="radio" name="formPick" value="star">
-                                <label><img src="star.png" width="14" height="14"></label>
+                                <input type="radio" name="formPick" value="star5">
+                                <label><img src="star5.png" width="14" height="14"></label>
                             </td>
                         </tr>
                         <tr class="palette">
@@ -465,11 +467,11 @@
                         </tr>
                         <tr class="palette">
                             <td style="border: 1px solid black;" colspan="10" class="color2">
-                                <input id="brushRange" type="range" min="2" max="192" step="2" value="96">
+                                <input id="brushRange" type="range" min="2" max="244" step="2" value="96">
                             </td>
                             <td style="border: 1px solid black;" colspan="2" class="color2">
-                                <input type="radio" name="sizePick" value="96" id="sizePickRange">
-                                <label id="brushRangeSize">96</label>
+                                <input type="radio" name="sizePick" value="144" id="sizePickRange">
+                                <label id="brushRangeSize">144</label>
                             </td>
                         </tr>
                         <tr>
@@ -483,7 +485,7 @@
                             </td>
                             <td colspan="10">
                                 <div id="post">
-                                    <p id="message">Draw here <img src="arrow.png" width="30" height="30"> and &nbsp;</p>
+                                    <p id="message">Draw here <img src="arrow.png" width="25" height="30"> and &nbsp;</p>
                                     <button id="postButton">Post</button>
                                 </div>
                             </td>

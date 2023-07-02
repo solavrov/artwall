@@ -162,15 +162,15 @@ async function build() {
 
     ////// draw point on canvas ///////
     const drawAt = (x, y) => {    
+        x += ADJUSTMENT;
+        y += ADJUSTMENT;
         if (glob.brushForm === "square") {
-            ctx.fillRect(x - glob.brushSize/2 + ADJUSTMENT, y - glob.brushSize/2 + ADJUSTMENT, glob.brushSize, glob.brushSize);
+            ctx.fillRect(x - glob.brushSize/2, y - glob.brushSize/2, glob.brushSize, glob.brushSize);
         } else if (glob.brushForm === "circle") {
             ctx.beginPath();
-            ctx.arc(x + ADJUSTMENT, y + ADJUSTMENT, glob.brushSize/2, 0, 2 * Math.PI, false);
+            ctx.arc(x, y, glob.brushSize/2, 0, 2 * Math.PI, false);
             ctx.fill();
         } else if (glob.brushForm === "star") {
-            x += ADJUSTMENT;
-            y += ADJUSTMENT;
             let s1, s2;
             if (glob.brushSize >= 6) {
                 s1 = glob.brushSize / 2;
@@ -189,6 +189,35 @@ async function build() {
             ctx.lineTo(x + s1, y);
             ctx.lineTo(x + s2, y - s2);
             ctx.lineTo(x, y - s1);
+            ctx.closePath();
+            ctx.fill();
+        } else if (glob.brushForm === "ellipse") {
+            ctx.beginPath();
+            ctx.ellipse(x, y, glob.brushSize / 2, glob.brushSize / 4, 0, 0, 2 * Math.PI);
+            ctx.fill();
+        } else if (glob.brushForm === "ellipse2") {
+            ctx.beginPath();
+            ctx.ellipse(x, y, glob.brushSize / 4, glob.brushSize / 2, 0, 0, 2 * Math.PI);
+            ctx.fill();
+        } else if (glob.brushForm === "star5") {
+            let s;
+            if (glob.brushSize >= 6) {
+                s = glob.brushSize;
+            } else {
+                s = 4;
+            }
+            ctx.beginPath();
+            ctx.moveTo(x, y - 0.5 * s);
+            ctx.lineTo(x - 0.13 * s, y - 0.18 * s);
+            ctx.lineTo(x - 0.48 * s, y - 0.15 * s);
+            ctx.lineTo(x - 0.21 * s, y + 0.07 * s);
+            ctx.lineTo(x - 0.29 * s, y + 0.4 * s);
+            ctx.lineTo(x, y + 0.22 * s);
+            ctx.lineTo(x + 0.29 * s, y + 0.4 * s);
+            ctx.lineTo(x + 0.21 * s, y + 0.07 * s);
+            ctx.lineTo(x + 0.48 * s, y - 0.15 * s);
+            ctx.lineTo(x + 0.13 * s, y - 0.18 * s);
+            ctx.lineTo(x, y - 0.5 * s);
             ctx.closePath();
             ctx.fill();
         }
