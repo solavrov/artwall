@@ -406,6 +406,16 @@ async function build() {
         };
     }
 
+    const colorPicker = document.getElementById("colorPicker");
+    const myColorPick = document.getElementById("myColorPick");
+    colorPicker.onchange = function(event) {
+        if (myColorPick.checked) { ctx.fillStyle = colorPicker.value; }
+    }
+    myColorPick.onclick = function() {
+        ctx.fillStyle = colorPicker.value;
+    }
+
+
     /////// brush size pick radio ////////
     const sizePick = document.getElementsByName("sizePick");
     for (const radio of sizePick) {     

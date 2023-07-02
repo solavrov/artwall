@@ -191,6 +191,7 @@
                 outline: none;
                 border: 1px solid green;
                 height: 10px;
+                border-radius: 5px;
             }
 
             #brushRange::-webkit-slider-thumb {
@@ -202,6 +203,7 @@
                 cursor: pointer;
                 /* border-radius: 5px; */
                 border: 1px solid black;
+                box-shadow: 1px 1px black;
             }
 
             #brushRange::-moz-range-thumb {
@@ -211,6 +213,45 @@
                 cursor: pointer;
                 /* border-radius: 5px; */
                 border: 1px solid black;
+                box-shadow: 1px 1px black;
+            }
+
+            #colorPicker {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                width: 30px;
+                height: 14px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+            }
+
+            #colorPicker::-webkit-color-swatch {
+                border-radius: 8px;
+                border: 1px solid black;
+                box-shadow: 1px 1px black;
+                margin: 0;
+            }
+
+            #colorPicker::-moz-color-swatch {
+                border-radius: 8px;
+                border: 1px solid black;
+                box-shadow: 1px 1px black;
+                margin: 0;
+            }
+
+            #colorPicker::-webkit-color-swatch-wrapper {
+                margin-left: 0px;
+                margin-top: 4px;
+                padding: 0;
+            }
+
+            #colorPicker::-moz-color-swatch-wrapper {
+                margin-left: 0px;
+                margin-top: 4px;
+                padding: 0;
             }
 
         </style>
@@ -312,6 +353,43 @@
                                 <input type="radio" name="colorPick" value="mediumvioletred">
                             </td>
                         </tr>
+                        <tr class="palette">
+                            <td style="background: green; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="green">
+                            </td>
+                            <td style="background: OliveDrab; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="OliveDrab">
+                            </td>
+                            <td style="background: Aquamarine; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="Aquamarine">
+                            </td>
+                            <td style="background: LightSeaGreen; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="LightSeaGreen">
+                            </td>
+                            <td style="background: skyblue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="skyblue">
+                            </td>
+                            <td style="background: DodgerBlue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="DodgerBlue">
+                            </td>
+                            <td style="background: blue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="blue">
+                            </td>
+                            <td style="background: MidnightBlue; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="MidnightBlue">
+                            </td>
+                            <td style="background: magenta; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="magenta">
+                            </td>
+                            <td style="background: magenta; border: 1px solid black">
+                                <input type="radio" name="colorPick" value="magenta">
+                            </td>
+                            <td colspan="2" style="border: 1px solid black;">
+                                <input type="radio" id="myColorPick" name="colorPick" value="#FF0000">
+                                <input type="color" id="colorPicker" value="#FF0000">
+                            </td>
+                        </tr>
+                        
                         <tr class="palette">
                             <td style="border: 1px solid black; font-size: 18px;" colspan="2" class="color1">
                                 <input type="radio" name="formPick" value="circle" checked="checked">
