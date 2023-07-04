@@ -336,8 +336,16 @@
                         </tr>
                         <tr class="palette">
                             <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="1">
+                                <label>1</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color2">
                                 <input type="radio" name="sizePick" value="2">
                                 <label>2</label>
+                            </td>
+                            <td style="border: 1px solid black" colspan="2" class="color2">
+                                <input type="radio" name="sizePick" value="4">
+                                <label>4</label>
                             </td>
                             <td style="border: 1px solid black" colspan="2" class="color2">
                                 <input type="radio" name="sizePick" value="6" checked="checked">
@@ -351,22 +359,14 @@
                                 <input type="radio" name="sizePick" value="24">
                                 <label>24</label>
                             </td>
-                            <td style="border: 1px solid black" colspan="2" class="color2">
-                                <input type="radio" name="sizePick" value="48">
-                                <label>48</label>
-                            </td>
-                            <td style="border: 1px solid black" colspan="2" class="color2">
-                                <input type="radio" name="sizePick" value="72">
-                                <label>72</label>
-                            </td>
                         </tr>
                         <tr class="palette">
                             <td style="border: 1px solid black;" colspan="10" class="color2">
-                                <input id="brushRange" type="range" min="2" max="192" step="2" value="96">
+                                <input id="brushRange" type="range" min="8" max="200" step="4" value="100">
                             </td>
                             <td style="border: 1px solid black;" colspan="2" class="color2">
-                                <input type="radio" name="sizePick" value="96" id="sizePickRange">
-                                <label id="brushRangeSize">96</label>
+                                <input type="radio" name="sizePick" value="100" id="sizePickRange">
+                                <label id="brushRangeSize">100</label>
                             </td>
                         </tr>
 
