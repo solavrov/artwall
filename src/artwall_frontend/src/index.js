@@ -161,80 +161,67 @@ async function build() {
     }
 
     ////// draw point on canvas ///////
-    const drawAt = (x, y) => {    
+    const drawAt = (x, y) => {
+        x += ADJUSTMENT2;
+        y += ADJUSTMENT2;
         if (glob.brushSize === 1) {
-            x += ADJUSTMENT2;
-            y += ADJUSTMENT2;
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-            const j = 4 * (canvas.width * Math.round(y) + Math.round(x));
-            const color = [
-                parseInt(ctx.fillStyle.slice(1, 3), 16),
-                parseInt(ctx.fillStyle.slice(3, 5), 16),
-                parseInt(ctx.fillStyle.slice(5, 7), 16)
-            ];
-            [data[j], data[j + 1], data[j + 2]] = color;
-            ctx.putImageData(imageData, 0, 0);
-        } else {
-            x += ADJUSTMENT;
-            y += ADJUSTMENT;
-            if (glob.brushForm === "square") {
-                ctx.fillRect(x - glob.brushSize/2, y - glob.brushSize/2, glob.brushSize, glob.brushSize);
-            } else if (glob.brushForm === "circle") {
-                ctx.beginPath();
-                ctx.arc(x, y, glob.brushSize/2, 0, 2 * Math.PI, false);
-                ctx.fill();
-            } else if (glob.brushForm === "star") {
-                let s1, s2;
-                if (glob.brushSize >= 6) {
-                    s1 = glob.brushSize / 2;
-                    s2 = s1 / 5;
-                } else {
-                    s1 = 2;
-                    s2 = 0.5;
-                }
-                ctx.beginPath();
-                ctx.moveTo(x, y - s1);
-                ctx.lineTo(x - s2, y - s2);
-                ctx.lineTo(x - s1, y);
-                ctx.lineTo(x - s2, y + s2);
-                ctx.lineTo(x, y + s1);
-                ctx.lineTo(x + s2, y + s2);
-                ctx.lineTo(x + s1, y);
-                ctx.lineTo(x + s2, y - s2);
-                ctx.lineTo(x, y - s1);
-                ctx.closePath();
-                ctx.fill();
-            } else if (glob.brushForm === "ellipse") {
-                ctx.beginPath();
-                ctx.ellipse(x, y, glob.brushSize / 2, glob.brushSize / 4, 0, 0, 2 * Math.PI);
-                ctx.fill();
-            } else if (glob.brushForm === "ellipse2") {
-                ctx.beginPath();
-                ctx.ellipse(x, y, glob.brushSize / 4, glob.brushSize / 2, 0, 0, 2 * Math.PI);
-                ctx.fill();
-            } else if (glob.brushForm === "star5") {
-                let s;
-                if (glob.brushSize >= 6) {
-                    s = glob.brushSize;
-                } else {
-                    s = 4;
-                }
-                ctx.beginPath();
-                ctx.moveTo(x, y - 0.5 * s);
-                ctx.lineTo(x - 0.13 * s, y - 0.18 * s);
-                ctx.lineTo(x - 0.48 * s, y - 0.15 * s);
-                ctx.lineTo(x - 0.21 * s, y + 0.07 * s);
-                ctx.lineTo(x - 0.29 * s, y + 0.4 * s);
-                ctx.lineTo(x, y + 0.22 * s);
-                ctx.lineTo(x + 0.29 * s, y + 0.4 * s);
-                ctx.lineTo(x + 0.21 * s, y + 0.07 * s);
-                ctx.lineTo(x + 0.48 * s, y - 0.15 * s);
-                ctx.lineTo(x + 0.13 * s, y - 0.18 * s);
-                ctx.lineTo(x, y - 0.5 * s);
-                ctx.closePath();
-                ctx.fill();
+            ctx.fillRect(x, y, 1, 1);
+        } else if (glob.brushForm === "square") {
+            ctx.fillRect(x - glob.brushSize/2, y - glob.brushSize/2, glob.brushSize, glob.brushSize);
+        } else if (glob.brushForm === "circle") {
+            ctx.beginPath();
+            ctx.arc(x, y, glob.brushSize/2, 0, 2 * Math.PI, false);
+            ctx.fill();
+        } else if (glob.brushForm === "star") {
+            let s1, s2;
+            if (glob.brushSize >= 6) {
+                s1 = glob.brushSize / 2;
+                s2 = s1 / 5;
+            } else {
+                s1 = 2;
+                s2 = 0.5;
             }
+            ctx.beginPath();
+            ctx.moveTo(x, y - s1);
+            ctx.lineTo(x - s2, y - s2);
+            ctx.lineTo(x - s1, y);
+            ctx.lineTo(x - s2, y + s2);
+            ctx.lineTo(x, y + s1);
+            ctx.lineTo(x + s2, y + s2);
+            ctx.lineTo(x + s1, y);
+            ctx.lineTo(x + s2, y - s2);
+            ctx.lineTo(x, y - s1);
+            ctx.closePath();
+            ctx.fill();
+        } else if (glob.brushForm === "ellipse") {
+            ctx.beginPath();
+            ctx.ellipse(x, y, glob.brushSize / 2, glob.brushSize / 4, 0, 0, 2 * Math.PI);
+            ctx.fill();
+        } else if (glob.brushForm === "ellipse2") {
+            ctx.beginPath();
+            ctx.ellipse(x, y, glob.brushSize / 4, glob.brushSize / 2, 0, 0, 2 * Math.PI);
+            ctx.fill();
+        } else if (glob.brushForm === "star5") {
+            let s;
+            if (glob.brushSize >= 6) {
+                s = glob.brushSize;
+            } else {
+                s = 4;
+            }
+            ctx.beginPath();
+            ctx.moveTo(x, y - 0.5 * s);
+            ctx.lineTo(x - 0.13 * s, y - 0.18 * s);
+            ctx.lineTo(x - 0.48 * s, y - 0.15 * s);
+            ctx.lineTo(x - 0.21 * s, y + 0.07 * s);
+            ctx.lineTo(x - 0.29 * s, y + 0.4 * s);
+            ctx.lineTo(x, y + 0.22 * s);
+            ctx.lineTo(x + 0.29 * s, y + 0.4 * s);
+            ctx.lineTo(x + 0.21 * s, y + 0.07 * s);
+            ctx.lineTo(x + 0.48 * s, y - 0.15 * s);
+            ctx.lineTo(x + 0.13 * s, y - 0.18 * s);
+            ctx.lineTo(x, y - 0.5 * s);
+            ctx.closePath();
+            ctx.fill();
         }
     };
 
