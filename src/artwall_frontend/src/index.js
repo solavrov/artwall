@@ -498,19 +498,19 @@ async function build() {
 
     /////// post ////////
     async function post() {
-        postButton.disabled = true;
-        undoButton.disabled = true;
-        redoButton.disabled = true;
-        backButton.disabled = true;
-        nextButton.disabled = true;
-        container.style.opacity = "0.2";
-        postButton.disabled = true;
-        loader.style.visibility = "visible";
-        const img = document.createElement("img");
-        img.style.height = "200px";
-        img.style.width = "200px";
         const pix = canvas.toDataURL("image/png");
         if (pix !== VOID) {
+            postButton.disabled = true;
+            undoButton.disabled = true;
+            redoButton.disabled = true;
+            backButton.disabled = true;
+            nextButton.disabled = true;
+            container.style.opacity = "0.2";
+            postButton.disabled = true;
+            loader.style.visibility = "visible";
+            const img = document.createElement("img");
+            img.style.height = "200px";
+            img.style.width = "200px";
             await artwall_backend.putToGallery(pix);
             glob.gallery1.push(pix);
             if (glob.gallery1.length > BLOCK_SIZE) {
@@ -523,13 +523,13 @@ async function build() {
             ctx.fillStyle = c;
             glob.imgBuff.clean();
             glob.imgBuff.put(canvas.toDataURL("image/png"));
+            loader.style.visibility = "hidden";
+            container.style.opacity = "1";
+            postButton.disabled = false;
+            undoButton.disabled = false;
+            redoButton.disabled = false;
+            nextButton.disabled = false;
         }
-        loader.style.visibility = "hidden";
-        container.style.opacity = "1";
-        postButton.disabled = false;
-        undoButton.disabled = false;
-        redoButton.disabled = false;
-        nextButton.disabled = false;
     }
 
     ///////////// buttons mouse handlers //////////////
