@@ -6,7 +6,7 @@ const VOID = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQCAYAAACAvzbM
 const ADJUSTMENT = -1.5; // brush position adjustment for drawing
 const ADJUSTMENT2 = -2; // brush position adjustment for filling
 const EDITOR_BUFFER_SIZE = 200; // size of undo-redo editors buffers
-const BLOCK_SIZE = 20; // number of pictures from total gallery to show at a time
+const BLOCK_SIZE = 24; // number of pictures from total gallery to show at a time
 
 ////// class that is used for managing redo and undo during editing pictures //////
 class Buffer {
