@@ -517,6 +517,7 @@ async function build() {
                 glob.gallery1.shift();
             }
             show(glob.gallery1);
+            glob.block = 1;
             const c = ctx.fillStyle;
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
