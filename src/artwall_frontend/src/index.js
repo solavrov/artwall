@@ -513,7 +513,9 @@ async function build() {
         if (pix !== VOID) {
             await artwall_backend.putToGallery(pix);
             glob.gallery1.push(pix);
-            glob.gallery1.shift();
+            if (glob.gallery1.length > BLOCK_SIZE) {
+                glob.gallery1.shift();
+            }
             show(glob.gallery1);
             const c = ctx.fillStyle;
             ctx.fillStyle = 'white';
