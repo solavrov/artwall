@@ -7,7 +7,7 @@ const ADJUSTMENT = -1.5; // brush position adjustment for drawing
 const ADJUSTMENT2 = -2; // brush position adjustment for filling
 const EDITOR_BUFFER_SIZE = 200; // size of undo-redo editors buffers
 const BLOCK_SIZE = 24; // number of pictures from total gallery to show at a time
-const SUBBLOCK_SIZE = 6; // quant of query for gallery reading to comply with IC limitations
+const SUBBLOCK_SIZE = 8; // quant of query for gallery reading to comply with IC limitations
 const SUBBLOCKS_IN_BLOCK = BLOCK_SIZE / SUBBLOCK_SIZE;
 
 ////// class that is used for managing redo and undo during editing pictures //////
