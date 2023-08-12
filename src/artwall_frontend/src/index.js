@@ -7,6 +7,8 @@ const ADJUSTMENT = -1.5; // brush position adjustment for drawing
 const ADJUSTMENT2 = -2; // brush position adjustment for filling
 const EDITOR_BUFFER_SIZE = 200; // size of undo-redo editors buffers
 const BLOCK_SIZE = 24; // number of pictures from total gallery to show at a time
+const SUBBLOCK_SIZE = 6; // quant of query for gallery reading to comply with IC limitations
+const SUBBLOCKS_IN_BLOCK = BLOCK_SIZE / SUBBLOCK_SIZE;
 
 ////// class that is used for managing redo and undo during editing pictures //////
 class Buffer {
@@ -86,12 +88,30 @@ async function build() {
     }
 
     const container = document.getElementById("container");
-    const backButton  = document.getElementById("backButton");
-    const nextButton  = document.getElementById("nextButton");
+    const backButton = document.getElementById("backButton");
+    const nextButton = document.getElementById("nextButton");
+
+    ///// get part of total gallery (BLOCK_SIZE) to show in container by subblock to comply with ICP query size limitation //////
+    async function getBlockBySubs(block) {
+        let gallery = [];
+        for (let i = 1; i <= SUBBLOCKS_IN_BLOCK; i++) {
+            const subblock = (block - 1) * SUBBLOCKS_IN_BLOCK + i;
+            const g = await artwall_backend.getBlock(subblock, SUBBLOCK_SIZE);
+            if (g[g.length - 1] === "END") {
+                g.pop();
+                gallery = g.concat(gallery);
+                gallery.push("END");
+                break;
+            } else {
+                gallery = g.concat(gallery);
+            }
+        }
+        return gallery;
+    }
 
     ///// get part of total gallery (BLOCK_SIZE) to show in container //////
     async function getBlock(block) {
-        let gallery = await artwall_backend.getBlock(block, BLOCK_SIZE);
+        let gallery = await getBlockBySubs(block);
         if (gallery[0] === "END") {
             if (block == 1) {
                 nextButton.disabled = true;
