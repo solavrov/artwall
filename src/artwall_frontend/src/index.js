@@ -182,8 +182,8 @@ async function build() {
 
     ////// draw point on canvas ///////
     const drawAt = (x, y) => {
-        x += ADJUSTMENT2;
-        y += ADJUSTMENT2;
+        x += ADJUSTMENT;
+        y += ADJUSTMENT;
         if (glob.brushSize === 1) {
             ctx.fillRect(x, y, 1, 1);
         } else if (glob.brushForm === "square") {
